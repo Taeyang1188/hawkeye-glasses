@@ -8,8 +8,8 @@ const FittingService: React.FC = () => {
       {/* Hero Section */}
       <section className="relative h-[65vh] flex items-center justify-center bg-[#191919] overflow-hidden">
         <img 
-          src="https://images.unsplash.com/photo-1512411333314-9343949f6974?auto=format&fit=crop&q=80&w=2000" 
-          className="absolute inset-0 w-full h-full object-cover opacity-50 grayscale"
+          src="https://i.imgur.com/7ljfqmD.png" 
+          className="absolute inset-0 w-full h-full object-cover opacity-60"
           alt="Optical Fitting"
         />
         <div className="relative z-10 text-center text-white px-6">
