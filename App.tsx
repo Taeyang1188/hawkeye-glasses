@@ -29,6 +29,7 @@ const App: React.FC = () => {
   const [cart, setCart] = useState<number[]>([]);
   const [user, setUser] = useState<{ name: string; email: string } | null>(null);
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
+  const [hasWelcomeCoupon, setHasWelcomeCoupon] = useState(false);
 
   const [productStats, setProductStats] = useState<Record<number, number>>({
     100: 52, 101: 48, 102: 95, 103: 30
@@ -120,7 +121,13 @@ const App: React.FC = () => {
         )}
 
         {view === 'mypage' && user && (
-          <MyPage user={user} onLogout={() => {setUser(null); setView('home');}} onShopNow={() => navigateToShop()} />
+          <MyPage 
+            user={user} 
+            hasCoupon={hasWelcomeCoupon}
+            onDownloadCoupon={() => setHasWelcomeCoupon(true)}
+            onLogout={() => {setUser(null); setHasWelcomeCoupon(false); setView('home');}} 
+            onShopNow={() => navigateToShop()} 
+          />
         )}
 
         {view === 'huvits' && (

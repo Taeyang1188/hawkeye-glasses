@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { X, ChevronRight, Heart, ShoppingBag } from 'lucide-react';
+import { X, Heart } from 'lucide-react';
 
 interface Product {
   id: number;
@@ -64,7 +64,7 @@ const CartPage: React.FC<CartPageProps> = ({ cartItems, isLoggedIn, onUserClick,
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-16">
           <div className="lg:col-span-8 space-y-12">
             <div className="text-[10px] uppercase font-bold text-gray-400 tracking-widest border-b border-gray-100 pb-2 text-right">
-              관세를 포함한 가격입니다.
+              정확한 가격 및 재고 정보는 실시간으로 업데이트됩니다.
             </div>
             {itemsInCart.map((item, idx) => (
               <div key={`${item.id}-${idx}`} className="flex gap-8 pb-12 border-b border-gray-50 relative">
@@ -77,22 +77,18 @@ const CartPage: React.FC<CartPageProps> = ({ cartItems, isLoggedIn, onUserClick,
                 <div className="flex-grow grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div className="space-y-4">
                     <div className="space-y-1">
-                       <p className="text-[9px] uppercase font-bold text-gray-400 tracking-widest">뉴 시즌</p>
+                       <p className="text-[9px] uppercase font-bold text-gray-400 tracking-widest">추천 상품</p>
                        <p className="text-sm font-bold uppercase tracking-widest">{item.brand}</p>
                        <h3 className="text-sm font-medium text-gray-500">{item.name}</h3>
-                       <p className="text-[10px] text-gray-400">파페치 상품 ID: {3248561 + idx}</p>
                     </div>
                   </div>
                   <div className="md:text-right space-y-6">
                     <div>
                        <p className="text-sm font-bold">₩{typeof item.price === 'number' ? item.price.toLocaleString() : item.price}</p>
-                       <p className="text-[10px] text-gray-400 font-bold">관세 포함</p>
                     </div>
                     <div className="space-y-1">
-                      <p className="text-[10px] uppercase font-bold tracking-widest">사이즈</p>
-                      <button className="text-[11px] font-bold underline underline-offset-4">Standard 수정하기</button>
-                      <p className="text-[10px] uppercase font-bold tracking-widest mt-4">수량</p>
-                      <p className="text-[11px] font-bold">1 수정하기</p>
+                      <p className="text-[10px] uppercase font-bold tracking-widest">수량</p>
+                      <p className="text-[11px] font-bold">1</p>
                     </div>
                     <button className="flex items-center space-x-2 text-[10px] font-bold uppercase tracking-widest text-gray-500 mt-8">
                       <Heart size={14} />
@@ -102,14 +98,6 @@ const CartPage: React.FC<CartPageProps> = ({ cartItems, isLoggedIn, onUserClick,
                 </div>
               </div>
             ))}
-            
-            <div className="bg-gray-50 p-10 flex flex-col items-center text-center space-y-4">
-               <h3 className="text-lg font-light uppercase tracking-widest">입어보고 결정하세요!</h3>
-               <p className="text-xs text-gray-500 leading-relaxed max-w-md">
-                 이제 고민은 그만, 30일의 시간이 있으니까요 - <span className="font-bold underline">무료 반품 & 픽업 서비스</span>로 마음 편한 직구 더 알아보기
-               </p>
-               <button onClick={onShopNow} className="border border-black px-8 py-3 text-[10px] font-bold uppercase tracking-widest hover:bg-black hover:text-white transition-all">지금 쇼핑하기</button>
-            </div>
           </div>
 
           <div className="lg:col-span-4 space-y-8">
@@ -121,20 +109,18 @@ const CartPage: React.FC<CartPageProps> = ({ cartItems, isLoggedIn, onUserClick,
               </div>
               <div className="flex justify-between">
                 <span className="text-gray-500">배송비</span>
-                <span>₩0</span>
+                <span className="text-green-600">무료</span>
               </div>
             </div>
             <div className="flex justify-between text-sm font-bold uppercase tracking-widest">
-              <span>총 결제 금액</span>
+              <span>총 예상 결제 금액</span>
               <div className="text-right">
                 <p>KRW ₩{totalPrice.toLocaleString()}</p>
-                <p className="text-[9px] text-gray-400 font-normal mt-1">관세 포함</p>
               </div>
             </div>
             <button className="w-full bg-black text-white py-5 text-xs font-bold uppercase tracking-[0.2em] hover:bg-gray-900 transition-colors">
-              주문하기
+              주문 진행하기
             </button>
-            <p className="text-[10px] text-gray-400 text-center font-bold">30일 무료 반품 | 집으로 찾아오는 간편한 반품 픽업</p>
           </div>
         </div>
       )}
