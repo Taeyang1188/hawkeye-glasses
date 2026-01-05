@@ -11,6 +11,7 @@ interface HeaderProps {
   onNavigateHuvits: () => void;
   onNavigateFitting: () => void;
   onNavigateBrands: () => void;
+  onNavigateReviews: () => void;
   onUserClick: () => void;
   wishlistCount: number;
   cartCount: number;
@@ -25,6 +26,7 @@ const Header: React.FC<HeaderProps> = ({
   onNavigateHuvits,
   onNavigateFitting,
   onNavigateBrands,
+  onNavigateReviews,
   onUserClick,
   wishlistCount, 
   cartCount,
@@ -32,7 +34,7 @@ const Header: React.FC<HeaderProps> = ({
 }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  const handleMobileNav = (config?: FilterConfig | 'home' | 'cart' | 'wishlist' | 'huvits' | 'fitting' | 'brands') => {
+  const handleMobileNav = (config?: FilterConfig | 'home' | 'cart' | 'wishlist' | 'huvits' | 'fitting' | 'brands' | 'latest-review') => {
     setIsMenuOpen(false);
     if (config === 'home') onNavigateHome();
     else if (config === 'cart') onNavigateCart();
@@ -40,6 +42,7 @@ const Header: React.FC<HeaderProps> = ({
     else if (config === 'huvits') onNavigateHuvits();
     else if (config === 'fitting') onNavigateFitting();
     else if (config === 'brands') onNavigateBrands();
+    else if (config === 'latest-review') onNavigateReviews();
     else onNavigateShop(config as FilterConfig);
   };
 
@@ -90,6 +93,7 @@ const Header: React.FC<HeaderProps> = ({
         <button onClick={onNavigateHuvits}>HUVITS 정밀검안</button>
         <button onClick={onNavigateFitting}>1:1 핏팅서비스</button>
         <button onClick={onNavigateBrands}>브랜드관</button>
+        <button onClick={onNavigateReviews}>LATEST REVIEW</button>
       </div>
 
       {/* Mobile Menu Drawer */}
@@ -124,6 +128,7 @@ const Header: React.FC<HeaderProps> = ({
                   <button onClick={() => handleMobileNav('huvits')} className="text-sm font-medium uppercase tracking-widest text-left">HUVITS 정밀검안</button>
                   <button onClick={() => handleMobileNav('fitting')} className="text-sm font-medium uppercase tracking-widest text-left">1:1 핏팅서비스</button>
                   <button onClick={() => handleMobileNav('brands')} className="text-sm font-medium uppercase tracking-widest text-left">브랜드관</button>
+                  <button onClick={() => handleMobileNav('latest-review')} className="text-sm font-medium uppercase tracking-widest text-left">LATEST REVIEW</button>
                 </div>
               </div>
             </div>

@@ -14,6 +14,7 @@ import MyPage from './components/MyPage.tsx';
 import HuvitsService from './components/HuvitsService.tsx';
 import FittingService from './components/FittingService.tsx';
 import BrandSelectionPage from './components/BrandSelectionPage.tsx';
+import LatestReview from './components/LatestReview.tsx';
 
 export type Category = '안경테' | '렌즈' | '선글라스' | '콘택트렌즈';
 export type FilterConfig = {
@@ -23,7 +24,7 @@ export type FilterConfig = {
 };
 
 const App: React.FC = () => {
-  const [view, setView] = useState<'home' | 'shop' | 'cart' | 'wishlist' | 'mypage' | 'huvits' | 'fitting' | 'brands'>('home');
+  const [view, setView] = useState<'home' | 'shop' | 'cart' | 'wishlist' | 'mypage' | 'huvits' | 'fitting' | 'brands' | 'latest-review'>('home');
   const [shopFilter, setShopFilter] = useState<FilterConfig>({ category: '안경테', tab: 'ALL' });
   const [wishlist, setWishlist] = useState<number[]>([]);
   const [cart, setCart] = useState<number[]>([]);
@@ -75,6 +76,7 @@ const App: React.FC = () => {
         onNavigateHuvits={() => setView('huvits')}
         onNavigateFitting={() => setView('fitting')}
         onNavigateBrands={() => setView('brands')}
+        onNavigateReviews={() => setView('latest-review')}
         onUserClick={handleUserIconClick}
         wishlistCount={wishlist.length}
         cartCount={cart.length}
@@ -99,6 +101,10 @@ const App: React.FC = () => {
 
         {view === 'brands' && (
           <BrandSelectionPage onBrandSelect={(brand) => navigateToShop({ brand, tab: 'ALL' })} />
+        )}
+
+        {view === 'latest-review' && (
+          <LatestReview />
         )}
 
         {view === 'shop' && (

@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { MapPin, Phone, Facebook, Clock } from 'lucide-react';
+import { MapPin, Phone, Facebook, Clock, Instagram } from 'lucide-react';
 
 const Footer: React.FC = () => {
   const keywords = ["명동안경", "명동안경점", "명동안경원", "무테안경", "시청역안경", "myeongdong glasses", "myeongdong optical shop", "myeongdong eyewear", "seoul eyeglasses"];
@@ -21,6 +21,15 @@ const Footer: React.FC = () => {
               Precision, style, and care for your vision.
             </p>
             <div className="flex space-x-4">
+              {/* Instagram 버튼 추가 및 순서 조정: 인스타 -> B -> N -> F */}
+              <a 
+                href="https://www.instagram.com/hawk_eye_optical/" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="w-8 h-8 rounded-full border border-gray-600 flex items-center justify-center hover:bg-white hover:text-black transition-all"
+              >
+                <Instagram size={16} />
+              </a>
               <a 
                 href="https://blog.naver.com/hawkeye_optical" 
                 target="_blank" 
@@ -37,7 +46,9 @@ const Footer: React.FC = () => {
               >
                 N
               </a>
-              <a href="#" className="w-8 h-8 rounded-full border border-gray-600 flex items-center justify-center hover:bg-white hover:text-black transition-all"><Facebook size={16} /></a>
+              <a href="#" className="w-8 h-8 rounded-full border border-gray-600 flex items-center justify-center hover:bg-white hover:text-black transition-all">
+                <Facebook size={16} />
+              </a>
             </div>
           </div>
 

@@ -1,6 +1,6 @@
 
 import React, { useState, useMemo, useEffect } from 'react';
-import { SlidersHorizontal, ChevronLeft, Share2, Heart, MessageCircle, ShoppingBag } from 'lucide-react';
+import { SlidersHorizontal, ChevronLeft, Share2, Heart, MessageCircle, ShoppingBag, Info } from 'lucide-react';
 import { Category, FilterConfig } from '../App.tsx';
 
 interface Product {
@@ -51,7 +51,6 @@ const MOCK_PRODUCTS: Product[] = [
     createdAt: '2024-03-01'
   },
   {
-    // Fix: Using double quotes to handle single quote in product name
     id: 105, category: '선글라스', name: "L'Aveugle Par Amour", brand: 'Gucci', price: 420000,
     image: 'https://images.unsplash.com/photo-1572635196237-14b3f281503f?auto=format&fit=crop&q=80&w=600',
     tags: ['LUXURY'], filters: { '형태': 'Round', '소재': 'Metal' },
@@ -71,7 +70,6 @@ const MOCK_PRODUCTS: Product[] = [
   }
 ];
 
-// Added missing ShopPageProps interface to fix "Cannot find name 'ShopPageProps'"
 interface ShopPageProps {
   initialConfig: FilterConfig;
   wishlist: number[];
@@ -111,15 +109,12 @@ const ShopPage: React.FC<ShopPageProps> = ({ initialConfig, wishlist, toggleWish
   const filteredProducts = useMemo(() => {
     let result = [...MOCK_PRODUCTS];
 
-    // 1. 브랜드 필터링 (최우선)
     if (activeCategory === 'BRAND' && activeBrand) {
       result = result.filter(p => p.brand.toLowerCase() === activeBrand.toLowerCase());
     } else {
-      // 카테고리 필터링
       result = result.filter(p => p.category === activeCategory);
     }
 
-    // 2. 탭 필터링
     if (activeTab === 'NEW IN') {
       const fourteenDaysAgo = new Date();
       fourteenDaysAgo.setDate(fourteenDaysAgo.getDate() - 14);
@@ -132,7 +127,6 @@ const ShopPage: React.FC<ShopPageProps> = ({ initialConfig, wishlist, toggleWish
       result = result.filter(p => p.category === '렌즈' && p.isPremium);
     }
 
-    // 3. 사이드바 상세 필터 적용
     Object.entries(selectedFilters).forEach(([group, values]) => {
       if (values.length > 0) result = result.filter(p => values.includes(p.filters[group]));
     });
@@ -143,21 +137,83 @@ const ShopPage: React.FC<ShopPageProps> = ({ initialConfig, wishlist, toggleWish
   if (selectedProduct) {
     const isWished = wishlist.includes(selectedProduct.id);
     return (
-      <div className="bg-white min-h-screen">
+      <div className="bg-white min-h-screen animate-in fade-in duration-500">
         <div className="max-w-[1400px] mx-auto px-6 py-8">
-          <button onClick={() => setSelectedProductId(null)} className="flex items-center space-x-2 text-xs uppercase font-bold tracking-widest mb-12 hover:text-gray-500">
-            <ChevronLeft size={16} /> <span>Back to Collection</span>
-          </button>
+          <div className="flex justify-between items-center mb-12">
+            <button onClick={() => setSelectedProductId(null)} className="flex items-center space-x-2 text-xs uppercase font-bold tracking-widest hover:text-gray-500">
+              <ChevronLeft size={16} /> <span>Back to Collection</span>
+            </button>
+            {/* 삭제 요청 반영: "관세를 포함한 가격입니다" 문구 제거됨 */}
+          </div>
+          
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-20">
-            <div className="lg:col-span-7 aspect-[4/5] bg-gray-50"><img src={selectedProduct.image} className="w-full h-full object-cover" alt={selectedProduct.name} /></div>
-            <div className="lg:col-span-5 space-y-10">
-              <div className="space-y-4">
-                <p className="text-xs font-bold uppercase tracking-[0.3em] text-gray-400">{selectedProduct.brand}</p>
-                <h1 className="text-3xl font-light uppercase tracking-tight">{selectedProduct.name}</h1>
-                <p className="text-xl font-medium">₩{selectedProduct.price.toLocaleString()}</p>
-                <p className="text-[10px] text-gray-400 uppercase tracking-widest">실시간 조회수: {productStats[selectedProduct.id] || 0}회</p>
+            <div className="lg:col-span-7 aspect-[4/5] bg-gray-50 overflow-hidden">
+              <img src={selectedProduct.image} className="w-full h-full object-cover hover:scale-105 transition-transform duration-1000" alt={selectedProduct.name} />
+            </div>
+            
+            <div className="lg:col-span-5 space-y-12">
+              <div className="space-y-6">
+                <div className="space-y-2">
+                   <p className="text-[10px] font-bold text-gray-400 uppercase tracking-[0.4em]">New Season</p>
+                   <p className="text-sm font-bold uppercase tracking-[0.2em]">{selectedProduct.brand}</p>
+                   <h1 className="text-3xl font-light uppercase tracking-tight">{selectedProduct.name}</h1>
+                   {/* 삭제 요청 반영: "파페치 상품 ID" 문구 제거됨 */}
+                </div>
+                
+                <div className="flex items-baseline space-x-4">
+                  <p className="text-2xl font-medium tracking-tight">₩{selectedProduct.price.toLocaleString()}</p>
+                  {/* 삭제 요청 반영: "관세 포함" 문구 제거됨 */}
+                </div>
               </div>
-              <button onClick={() => addToCart(selectedProduct.id)} className="w-full bg-black text-white py-5 text-sm font-bold uppercase tracking-widest">ADD TO CART</button>
+
+              <div className="space-y-8 pt-8 border-t border-gray-100">
+                <div className="space-y-4">
+                  <div className="flex justify-between items-center">
+                    <label className="text-[10px] uppercase font-bold tracking-widest text-gray-400">사이즈</label>
+                    <button className="text-[10px] font-bold uppercase underline tracking-widest">수정하기</button>
+                  </div>
+                  <div className="w-full border border-gray-200 py-4 px-4 text-sm font-medium tracking-widest flex justify-between items-center cursor-pointer hover:border-black transition-colors">
+                    <span>Standard Fit</span>
+                  </div>
+                </div>
+
+                <div className="space-y-4">
+                  <div className="flex justify-between items-center">
+                    <label className="text-[10px] uppercase font-bold tracking-widest text-gray-400">수량</label>
+                    <button className="text-[10px] font-bold uppercase underline tracking-widest">수정하기</button>
+                  </div>
+                  <div className="w-full border border-gray-200 py-4 px-4 text-sm font-medium tracking-widest flex justify-between items-center cursor-pointer hover:border-black transition-colors">
+                    <span>1</span>
+                  </div>
+                </div>
+              </div>
+
+              <div className="space-y-4">
+                <button 
+                  onClick={() => addToCart(selectedProduct.id)} 
+                  className="w-full bg-[#191919] text-white py-5 text-xs font-bold uppercase tracking-[0.2em] hover:bg-black transition-all"
+                >
+                  ADD TO CART
+                </button>
+                <button 
+                  onClick={() => toggleWishlist(selectedProduct.id)}
+                  className="w-full border border-gray-200 py-5 text-xs font-bold uppercase tracking-[0.2em] hover:border-black transition-all flex items-center justify-center space-x-3"
+                >
+                  <Heart size={16} fill={isWished ? "black" : "none"} className={isWished ? "text-black" : "text-gray-400"} />
+                  <span>{isWished ? "WISHLISTED" : "ADD TO WISHLIST"}</span>
+                </button>
+              </div>
+
+              <div className="pt-12 border-t border-gray-100 space-y-6">
+                <div className="flex items-center space-x-3 text-xs font-medium text-gray-500">
+                  <Info size={16} />
+                  <span className="uppercase tracking-widest">실시간 조회수: {productStats[selectedProduct.id] || 0}회</span>
+                </div>
+                <p className="text-sm text-gray-500 font-light leading-relaxed">
+                  호크아이안경의 정밀한 가공 기술로 완성되는 프리미엄 아이웨어입니다. 
+                  17년 경력의 안경사가 직접 검수하고 핏팅하여 최상의 착용감을 선사합니다.
+                </p>
+              </div>
             </div>
           </div>
         </div>
