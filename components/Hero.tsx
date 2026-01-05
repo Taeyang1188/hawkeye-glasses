@@ -1,7 +1,11 @@
 
 import React from 'react';
 
-const Hero: React.FC = () => {
+interface HeroProps {
+  onCtaClick: () => void;
+}
+
+const Hero: React.FC<HeroProps> = ({ onCtaClick }) => {
   return (
     <section className="relative h-[70vh] md:h-[80vh] bg-gray-50 overflow-hidden">
       <div className="absolute inset-0">
@@ -23,10 +27,10 @@ const Hero: React.FC = () => {
             17년차 베테랑 안경사가 선사하는 설렘 가득한 완벽한 핏팅을 경험해보세요.
           </p>
           <div className="flex flex-col sm:flex-row space-y-3 sm:space-y-0 sm:space-x-4">
-            <button className="bg-black text-white px-10 py-4 text-xs font-semibold uppercase tracking-widest hover:bg-gray-800 transition-colors">
+            <button onClick={onCtaClick} className="bg-black text-white px-10 py-4 text-xs font-semibold uppercase tracking-widest hover:bg-gray-800 transition-colors">
               New Collection
             </button>
-            <button className="border border-black px-10 py-4 text-xs font-semibold uppercase tracking-widest hover:bg-black hover:text-white transition-all">
+            <button onClick={onCtaClick} className="border border-black px-10 py-4 text-xs font-semibold uppercase tracking-widest hover:bg-black hover:text-white transition-all">
               Our Service
             </button>
           </div>

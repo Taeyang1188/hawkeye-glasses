@@ -30,36 +30,44 @@ const ServiceInfo: React.FC = () => {
     <section className="bg-black text-white py-24">
       <div className="max-w-[1400px] mx-auto px-6">
         <div className="grid md:grid-cols-2 gap-16 items-center">
-          <div>
-            <span className="text-xs uppercase tracking-[0.4em] text-gray-500 mb-4 block">Our Expertise</span>
-            <h2 className="text-4xl md:text-5xl font-light mb-8 leading-tight">
-              당신의 시선이 머무는 곳에<br />호크아이가 함께 합니다
-            </h2>
-            <p className="text-gray-400 font-light text-lg mb-12 leading-relaxed">
-              안경은 단순한 도구가 아닌 스타일과 건강의 교집합입니다. 
-              명동 소공지하쇼핑센터에서 17년 동안 지켜온 신뢰로, 
-              여전히 새 안경을 맞춰드릴 때의 설렘을 담아 작업합니다.
-            </p>
-            <div className="grid grid-cols-2 gap-x-8 gap-y-12">
-              {services.map((item, idx) => (
-                <div key={idx}>
-                  <div className="text-white mb-4">{item.icon}</div>
-                  <h3 className="font-semibold mb-2">{item.title}</h3>
-                  <p className="text-sm text-gray-500 font-light">{item.desc}</p>
+          <div className="space-y-8">
+            <div>
+              <span className="text-xs uppercase tracking-[0.4em] text-gray-500 block mb-4">Our Story</span>
+              <h2 className="text-3xl md:text-4xl font-light uppercase tracking-tight leading-tight mb-6">
+                오랜 시간 쌓아온 감각은 그대로,<br />공간은 새롭게.
+              </h2>
+              <div className="space-y-4 text-gray-400 font-light leading-relaxed">
+                <p>
+                  17년 동안 다듬어온 검안과 피팅의 기준으로 명동 소공지하쇼핑센터에서 첫 인사를 드립니다.
+                </p>
+                <p>
+                  정확한 시력검사부터 완벽한 핏팅, 그리고 정밀한 조제가공까지. 
+                  우리는 단순한 안경이 아닌, 당신의 삶에 가장 잘 맞는 '한 벌의 시선'을 제안합니다.
+                </p>
+                <p className="text-white font-medium italic">
+                  "오늘, 당신에게 가장 잘 맞는 한 벌의 시선을 준비해둘게요."
+                </p>
+              </div>
+            </div>
+            
+            <div className="grid grid-cols-2 gap-8 pt-8 border-t border-gray-800">
+              {services.map((s, i) => (
+                <div key={i} className="space-y-3">
+                  <div className="text-gray-500">{s.icon}</div>
+                  <h4 className="text-sm font-bold uppercase tracking-wider">{s.title}</h4>
+                  <p className="text-xs text-gray-400 font-light leading-snug">{s.desc}</p>
                 </div>
               ))}
             </div>
           </div>
-          <div className="relative aspect-square">
+          
+          <div className="relative aspect-square md:aspect-[4/5] overflow-hidden group">
             <img 
-              src="https://images.unsplash.com/photo-1516714819001-8ee7a13b71d7?auto=format&fit=crop&q=80&w=1000" 
-              alt="HUVITS Equipment" 
-              className="w-full h-full object-cover rounded-sm grayscale"
+              src="https://i.imgur.com/AyzWnq6.jpeg" 
+              alt="Hawkeye Optical Interior" 
+              className="w-full h-full object-cover grayscale transition-all duration-700 group-hover:grayscale-0 group-hover:scale-105"
             />
-            <div className="absolute -bottom-8 -left-8 bg-white text-black p-10 hidden lg:block">
-              <p className="text-3xl font-light italic mb-2">"Still excited for every client."</p>
-              <p className="text-xs uppercase tracking-widest font-bold text-gray-400">- Master Optician</p>
-            </div>
+            <div className="absolute inset-0 border-[20px] border-black opacity-20 pointer-events-none"></div>
           </div>
         </div>
       </div>

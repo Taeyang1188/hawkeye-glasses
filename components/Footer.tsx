@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { MapPin, Phone, Instagram, Facebook, Clock } from 'lucide-react';
+import { MapPin, Phone, Facebook, Clock } from 'lucide-react';
 
 const Footer: React.FC = () => {
   const keywords = ["명동안경", "명동안경점", "명동안경원", "무테안경", "시청역안경", "myeongdong glasses", "myeongdong optical shop", "myeongdong eyewear", "seoul eyeglasses"];
@@ -10,19 +10,34 @@ const Footer: React.FC = () => {
       <div className="max-w-[1400px] mx-auto px-6">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-20">
           {/* Brand Col */}
-          <div className="space-y-6">
+          <div className="space-y-8">
             <img 
-              src="https://i.imgur.com/4zenlLd.png" 
+              src="https://i.imgur.com/sTJufRT.png" 
               alt="Hawkeye Optical" 
-              className="h-16 w-auto invert brightness-0"
+              className="h-24 md:h-32 w-auto invert brightness-0 object-contain"
             />
             <p className="text-sm text-gray-400 font-light leading-relaxed max-w-xs">
               Hawkeye Optical delivers premium eyewear with 17 years of expertise. 
               Precision, style, and care for your vision.
             </p>
             <div className="flex space-x-4">
-              <a href="#" className="hover:text-gray-400 transition-colors"><Instagram size={20} /></a>
-              <a href="#" className="hover:text-gray-400 transition-colors"><Facebook size={20} /></a>
+              <a 
+                href="https://blog.naver.com/hawkeye_optical" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="w-8 h-8 rounded-full border border-gray-600 flex items-center justify-center text-[11px] font-bold hover:bg-white hover:text-black transition-all"
+              >
+                B
+              </a>
+              <a 
+                href="https://naver.me/5noAk25v" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="w-8 h-8 rounded-full border border-gray-600 flex items-center justify-center text-[11px] font-bold hover:bg-white hover:text-black transition-all"
+              >
+                N
+              </a>
+              <a href="#" className="w-8 h-8 rounded-full border border-gray-600 flex items-center justify-center hover:bg-white hover:text-black transition-all"><Facebook size={16} /></a>
             </div>
           </div>
 
