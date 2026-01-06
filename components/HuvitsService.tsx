@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import { ArrowRight, CheckCircle } from 'lucide-react';
 
 interface HuvitsServiceProps {
@@ -7,6 +7,10 @@ interface HuvitsServiceProps {
 }
 
 const HuvitsService: React.FC<HuvitsServiceProps> = ({ onShopNow }) => {
+  useEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: 'instant' as any });
+  }, []);
+
   return (
     <div className="bg-white min-h-screen animate-in fade-in duration-700">
       {/* Hero Section */}

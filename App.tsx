@@ -76,14 +76,18 @@ const App: React.FC = () => {
     }
   };
 
-  // 강력한 스크롤 상단 이동 로직
+  // 강력한 스크롤 상단 이동 로직 (모든 뷰 전환에 대응)
   useEffect(() => {
-    // 렌더링 직후 즉시 이동
-    window.scrollTo(0, 0);
-    // 브라우저 렌더링 큐 고려하여 지연 이동 (이중 보장)
+    // 1. 즉각적인 이동 시도
+    window.scrollTo({ top: 0, left: 0, behavior: 'instant' as any });
+    
+    // 2. 브라우저 렌더링 주기와 레이아웃 시프트를 고려한 이중 보정
     const timeoutId = setTimeout(() => {
       window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
+      document.documentElement.scrollTop = 0;
+      document.body.scrollTop = 0;
     }, 10);
+    
     return () => clearTimeout(timeoutId);
   }, [view, shopFilter]);
 

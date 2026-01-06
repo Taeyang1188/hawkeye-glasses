@@ -4,6 +4,8 @@ import { Instagram, PlayCircle, Star } from 'lucide-react';
 
 const LatestReview: React.FC = () => {
   useEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: 'instant' as any });
+    
     // Elfsight 플랫폼 스크립트 동적 로드
     const script = document.createElement('script');
     script.src = "https://elfsightcdn.com/platform.js";

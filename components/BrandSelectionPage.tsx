@@ -1,5 +1,5 @@
 
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import { Search, X } from 'lucide-react';
 
 const brands = [
@@ -19,6 +19,10 @@ interface BrandSelectionPageProps {
 
 const BrandSelectionPage: React.FC<BrandSelectionPageProps> = ({ onBrandSelect }) => {
   const [searchTerm, setSearchTerm] = useState('');
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: 'instant' as any });
+  }, []);
 
   // 검색 로직: 영문 이름 또는 한글 이름에 검색어가 포함되어 있는지 확인
   const filteredBrands = useMemo(() => {
