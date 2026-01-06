@@ -32,17 +32,18 @@ const ServiceInfo: React.FC = () => {
         <div className="grid md:grid-cols-2 gap-16 items-center">
           <div className="space-y-12">
             <div>
-              <span className="text-xs uppercase tracking-[0.4em] text-gray-500 block mb-4 font-bold">Our Story</span>
-              <h2 className="text-3xl md:text-4xl font-light uppercase tracking-tight leading-tight mb-8">
-                오랜 시간 쌓아온 감각은 그대로,<br />공간은 새롭게.
-              </h2>
+              <span className="text-xs uppercase tracking-[0.4em] text-gray-500 block mb-4 font-bold">The Best Myeongdong Optical Shop</span>
+              <h1 className="text-3xl md:text-4xl font-light uppercase tracking-tight leading-tight mb-8">
+                오랜 시간 쌓아온 감각은 그대로,<br />명동의 공간은 새롭게.
+              </h1>
               <div className="space-y-6 text-gray-400 font-light leading-relaxed text-base md:text-lg">
                 <p>
-                  17년 동안 다듬어온 검안과 피팅의 기준으로 명동 소공지하쇼핑센터에서 첫 인사를 드립니다.
+                  17년 동안 다듬어온 검안과 피팅의 기준으로 <strong>명동 소공지하쇼핑센터</strong>에서 첫 인사를 드립니다. 
+                  많은 분들이 추천하는 명동 안경점으로서의 자부심을 지켜나가겠습니다.
                 </p>
                 <p>
                   정확한 시력검사부터 완벽한 핏팅, 그리고 정밀한 조제가공까지. 
-                  우리는 단순한 안경이 아닌, 당신의 삶에 가장 잘 맞는 '한 벌의 시선'을 제안합니다.
+                  우리는 단순한 안경이 아닌, <strong>Korean Style Eyewear</strong> 트렌드와 당신의 삶에 가장 잘 맞는 '한 벌의 시선'을 제안합니다.
                 </p>
                 <p className="text-white font-medium italic text-lg md:text-xl">
                   "오늘, 당신에게 가장 잘 맞는 한 벌의 시선을 준비해둘게요."
@@ -64,7 +65,7 @@ const ServiceInfo: React.FC = () => {
           <div className="relative aspect-square md:aspect-[4/5] overflow-hidden group">
             <img 
               src="https://i.imgur.com/AyzWnq6.jpeg" 
-              alt="Hawkeye Optical Interior" 
+              alt="Hawkeye Optical Myeongdong Interior" 
               className="w-full h-full object-cover grayscale transition-all duration-700 group-hover:grayscale-0 group-hover:scale-105"
             />
             <div className="absolute inset-0 border-[20px] border-black opacity-20 pointer-events-none"></div>

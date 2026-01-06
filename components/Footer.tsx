@@ -2,8 +2,16 @@
 import React from 'react';
 import { MapPin, Phone, Facebook, Clock, Instagram } from 'lucide-react';
 
-const Footer: React.FC = () => {
-  const keywords = ["명동안경", "명동안경점", "명동안경원", "무테안경", "시청역안경", "myeongdong glasses", "myeongdong optical shop", "myeongdong eyewear", "seoul eyeglasses"];
+interface FooterProps {
+  onAdminClick?: () => void;
+}
+
+const Footer: React.FC<FooterProps> = ({ onAdminClick }) => {
+  const keywords = [
+    "명동안경", "명동안경점", "명동안경원", "무테안경 전문", "시청역안경", 
+    "myeongdong optical shop", "myeongdong eyewear shop", "best eyeglasses seoul", 
+    "korean fashion glasses", "myeongdong shopping guide", "eye exam seoul"
+  ];
 
   return (
     <footer className="bg-[#191919] text-white pt-20 pb-10">
@@ -13,12 +21,12 @@ const Footer: React.FC = () => {
           <div className="space-y-8">
             <img 
               src="https://i.imgur.com/sTJufRT.png" 
-              alt="Hawkeye Optical" 
+              alt="Hawkeye Optical Myeongdong" 
               className="h-24 md:h-32 w-auto invert brightness-0 object-contain"
             />
             <p className="text-sm text-gray-400 font-light leading-relaxed max-w-xs">
-              Hawkeye Optical delivers premium eyewear with 17 years of expertise. 
-              Precision, style, and care for your vision.
+              <strong>Hawkeye Optical Myeongdong</strong> delivers premium eyewear with 17 years of expertise. 
+              Precision, style, and care for your vision in the heart of Seoul.
             </p>
             <div className="flex space-x-4">
               <a 
@@ -53,11 +61,11 @@ const Footer: React.FC = () => {
 
           {/* Contact Col */}
           <div className="space-y-6">
-            <h4 className="text-xs uppercase font-bold tracking-[0.2em]">Contact Us</h4>
+            <h4 className="text-xs uppercase font-bold tracking-[0.2em]">Contact & Location</h4>
             <div className="space-y-4 text-sm font-light text-gray-400">
               <div className="flex items-start space-x-3">
                 <MapPin size={18} className="shrink-0 text-white" />
-                <span>서울 중구 소공로 102 소공지하쇼핑센터 30호</span>
+                <span>서울 중구 소공로 102 소공지하쇼핑센터 30호 (명동역/시청역 인근)</span>
               </div>
               <div className="flex items-center space-x-3">
                 <Phone size={18} className="shrink-0 text-white" />
@@ -67,7 +75,7 @@ const Footer: React.FC = () => {
                 <Clock size={18} className="shrink-0 mt-0.5 text-white" />
                 <div className="flex flex-col space-y-0.5">
                   <span>월-토: 10:00 - 19:00</span>
-                  <span className="text-red-500 font-medium">일요일: 정기휴무</span>
+                  <span className="text-red-500 font-medium">일요일: 정기휴무 (Regular Holiday)</span>
                 </div>
               </div>
             </div>
@@ -77,11 +85,11 @@ const Footer: React.FC = () => {
           <div className="space-y-6">
             <h4 className="text-xs uppercase font-bold tracking-[0.2em]">Customer Service</h4>
             <nav className="flex flex-col space-y-3 text-sm font-light text-gray-400">
-              <a href="#" className="hover:text-white transition-colors">Vision Checkups</a>
+              <a href="#" className="hover:text-white transition-colors">Vision Checkups in Myeongdong</a>
               <a href="#" className="hover:text-white transition-colors">Frame Repairs</a>
-              <a href="#" className="hover:text-white transition-colors">Custom Fitting</a>
+              <a href="#" className="hover:text-white transition-colors">Custom Fitting Service</a>
               <a href="#" className="hover:text-white transition-colors">Shipping & Returns</a>
-              <a href="#" className="hover:text-white transition-colors">Contact Expert</a>
+              <a href="#" className="hover:text-white transition-colors">Contact Optician</a>
             </nav>
           </div>
 
@@ -89,7 +97,7 @@ const Footer: React.FC = () => {
           <div className="space-y-6">
             <h4 className="text-xs uppercase font-bold tracking-[0.2em]">Newsletter</h4>
             <p className="text-sm font-light text-gray-400">
-              Subscribe to receive updates, access to exclusive deals, and more.
+              Subscribe to get news on Korean eyewear trends and exclusive Myeongdong store offers.
             </p>
             <div className="flex border-b border-gray-600 pb-2">
               <input 
@@ -110,10 +118,18 @@ const Footer: React.FC = () => {
             ))}
           </div>
           <div className="flex flex-col md:flex-row justify-between items-center text-[10px] text-gray-600 uppercase tracking-[0.2em]">
-            <p>&copy; 2024 Hawkeye Optical. All Rights Reserved.</p>
-            <div className="flex space-x-6 mt-4 md:mt-0">
+            <p>&copy; 2024 Hawkeye Optical Myeongdong. All Rights Reserved.</p>
+            <div className="flex space-x-6 mt-4 md:mt-0 items-center">
               <a href="#" className="hover:text-white">Privacy Policy</a>
               <a href="#" className="hover:text-white">Terms of Service</a>
+              {onAdminClick && (
+                <button 
+                  onClick={onAdminClick}
+                  className="ml-4 opacity-40 hover:opacity-100 transition-opacity text-gray-500 hover:text-white"
+                >
+                  ADMIN
+                </button>
+              )}
             </div>
           </div>
         </div>

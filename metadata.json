@@ -1,16 +1,20 @@
 {
-  "name": "호크아이안경 (Hawkeye Optical) - 명동 프리미엄 안경원",
-  "description": "품격 있는 안경, 그 이상의 가치를 전하는 명동 호크아이안경. 17년 경력의 베테랑 안경사가 HUVITS 최신 장비로 정밀한 시력검사와 완벽한 피팅을 약속합니다. 명동 안경점, 시청역 안경원 추천.",
+  "name": "호크아이안경 (Hawkeye Optical) - Myeongdong Best Optical Shop",
+  "description": "명동 최고의 안경원 호크아이안경. 17년 경력 안경사의 정밀 검안과 Korean Style 맞춤 안경 피팅 서비스를 제공합니다. Myeongdong optical shop specialized in Korean fashion frames and premium lenses.",
   "keywords": [
     "명동안경",
     "명동안경점",
     "명동안경원",
     "무테안경",
     "시청역안경",
+    "명동 쇼핑 안경",
     "myeongdong glasses",
     "myeongdong optical shop",
     "myeongdong eyewear",
-    "seoul eyeglasses"
+    "seoul eyeglasses",
+    "best optical shop seoul",
+    "korean style eyewear",
+    "rimless glasses korea"
   ],
   "requestFramePermissions": []
 }
