@@ -19,6 +19,7 @@ import LatestReview from './components/LatestReview.tsx';
 import AdminLogin from './components/AdminLogin.tsx';
 import AdminDashboard from './components/AdminDashboard.tsx';
 import ConsultationFAB from './components/ConsultationFAB.tsx';
+import PolicyPage from './components/PolicyPage.tsx';
 
 export type Category = '안경테' | '렌즈' | '선글라스' | '콘택트렌즈';
 export type FilterConfig = {
@@ -29,7 +30,7 @@ export type FilterConfig = {
 };
 
 const App: React.FC = () => {
-  const [view, setView] = useState<'home' | 'shop' | 'cart' | 'wishlist' | 'mypage' | 'huvits' | 'fitting' | 'brands' | 'latest-review' | 'admin-login' | 'admin-dashboard'>('home');
+  const [view, setView] = useState<'home' | 'shop' | 'cart' | 'wishlist' | 'mypage' | 'huvits' | 'fitting' | 'brands' | 'latest-review' | 'admin-login' | 'admin-dashboard' | 'policy'>('home');
   const [shopFilter, setShopFilter] = useState<FilterConfig>({ category: '안경테', tab: 'ALL' });
   const [wishlist, setWishlist] = useState<number[]>([]);
   const [cart, setCart] = useState<number[]>([]);
@@ -188,13 +189,20 @@ const App: React.FC = () => {
         
         {view === 'huvits' && <HuvitsService onShopNow={() => navigateToShop({ category: '렌즈', tab: '프리미엄 렌즈' })} />}
         {view === 'fitting' && <FittingService />}
+        {view === 'policy' && <PolicyPage onBack={() => setView('home')} />}
         {view === 'brands' && <BrandSelectionPage onBrandSelect={(brand) => navigateToShop({ brand, tab: 'ALL' })} />}
         {view === 'latest-review' && <LatestReview />}
         {view === 'admin-login' && <AdminLogin onLoginSuccess={() => setView('admin-dashboard')} onCancel={() => setView('home')} />}
         {view === 'admin-dashboard' && <AdminDashboard onLogout={() => setView('home')} />}
       </main>
 
-      {!view.startsWith('admin') && <Footer onAdminClick={() => setView('admin-login')} />}
+      {!view.startsWith('admin') && (
+        <Footer 
+          onAdminClick={() => setView('admin-login')} 
+          onNavigateFitting={() => setView('fitting')}
+          onNavigatePolicy={() => setView('policy')}
+        />
+      )}
       {!view.startsWith('admin') && <ConsultationFAB />}
 
       {isLoginModalOpen && (

@@ -4,9 +4,11 @@ import { MapPin, Phone, Facebook, Clock, Instagram } from 'lucide-react';
 
 interface FooterProps {
   onAdminClick?: () => void;
+  onNavigateFitting?: () => void;
+  onNavigatePolicy?: () => void;
 }
 
-const Footer: React.FC<FooterProps> = ({ onAdminClick }) => {
+const Footer: React.FC<FooterProps> = ({ onAdminClick, onNavigateFitting, onNavigatePolicy }) => {
   const keywords = [
     "명동안경", "명동안경점", "명동안경원", "무테안경 전문", "시청역안경", 
     "myeongdong optical shop", "myeongdong eyewear shop", "best eyeglasses seoul", 
@@ -29,7 +31,6 @@ const Footer: React.FC<FooterProps> = ({ onAdminClick }) => {
               Precision, style, and care for your vision in the heart of Seoul.
             </p>
             <div className="flex space-x-4">
-              {/* Instagram */}
               <a 
                 href="https://www.instagram.com/hawk_eye_optical/" 
                 target="_blank" 
@@ -38,8 +39,6 @@ const Footer: React.FC<FooterProps> = ({ onAdminClick }) => {
               >
                 <Instagram size={16} />
               </a>
-
-              {/* Google Place (Added to the right of Instagram) */}
               <a 
                 href="https://www.google.com/viewer/place?mid=/g/11ym3bh3tg" 
                 target="_blank" 
@@ -50,8 +49,6 @@ const Footer: React.FC<FooterProps> = ({ onAdminClick }) => {
                   <path d="M12.48 10.92v3.28h7.84c-.24 1.84-.91 3.22-1.92 4.22-1.2 1.2-3.1 2.5-6.84 2.5-6.04 0-10.74-4.9-10.74-10.94S5.54 1.14 11.58 1.14c3.26 0 5.61 1.28 7.37 2.96l2.31-2.31C19.24.4 16.14-1 11.58-1 5.2-1 0 4.2 0 10.5s5.2 11.5 11.58 11.5c3.43 0 6.03-1.13 8.24-3.43 2.27-2.27 2.99-5.46 2.99-8.1 0-.77-.07-1.48-.2-2.15h-10.13z" />
                 </svg>
               </a>
-
-              {/* Naver Blog */}
               <a 
                 href="https://blog.naver.com/hawkeye_optical" 
                 target="_blank" 
@@ -60,8 +57,6 @@ const Footer: React.FC<FooterProps> = ({ onAdminClick }) => {
               >
                 B
               </a>
-
-              {/* Naver Place */}
               <a 
                 href="https://naver.me/5noAk25v" 
                 target="_blank" 
@@ -70,8 +65,6 @@ const Footer: React.FC<FooterProps> = ({ onAdminClick }) => {
               >
                 N
               </a>
-
-              {/* Facebook */}
               <a href="#" className="w-8 h-8 rounded-full border border-gray-600 flex items-center justify-center hover:bg-white hover:text-black transition-all">
                 <Facebook size={16} />
               </a>
@@ -100,15 +93,30 @@ const Footer: React.FC<FooterProps> = ({ onAdminClick }) => {
             </div>
           </div>
 
-          {/* Quick Links */}
+          {/* Customer Service */}
           <div className="space-y-6">
             <h4 className="text-xs uppercase font-bold tracking-[0.2em]">Customer Service</h4>
             <nav className="flex flex-col space-y-3 text-sm font-light text-gray-400">
-              <a href="#" className="hover:text-white transition-colors">Vision Checkups in Myeongdong</a>
-              <a href="#" className="hover:text-white transition-colors">Frame Repairs</a>
-              <a href="#" className="hover:text-white transition-colors">Custom Fitting Service</a>
-              <a href="#" className="hover:text-white transition-colors">Shipping & Returns</a>
-              <a href="#" className="hover:text-white transition-colors">Contact Optician</a>
+              <button 
+                onClick={onNavigateFitting} 
+                className="text-left hover:text-white transition-colors uppercase tracking-widest"
+              >
+                1:1 핏팅 서비스
+              </button>
+              <button 
+                onClick={onNavigatePolicy} 
+                className="text-left hover:text-white transition-colors uppercase tracking-widest"
+              >
+                교환 및 반품 안내 (CS)
+              </button>
+              <a 
+                href="https://talk.naver.com/ct/wklrhfk?frm" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="hover:text-white transition-colors uppercase tracking-widest"
+              >
+                네이버 톡톡 문의
+              </a>
             </nav>
           </div>
 

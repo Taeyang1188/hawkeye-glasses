@@ -69,9 +69,9 @@ const LatestReview: React.FC = () => {
 
       {/* Brand Ethos Section */}
       <section className="bg-black text-white py-24 text-center px-6">
-        <div className="max-w-3xl mx-auto space-y-8">
+        <div className="max-w-5xl mx-auto space-y-8">
            <h4 className="text-xs font-bold uppercase tracking-[0.4em] text-gray-500">Your Vision, Our Pride</h4>
-           <h2 className="text-2xl md:text-3xl font-light leading-relaxed">
+           <h2 className="text-2xl md:text-3xl font-light leading-relaxed md:whitespace-nowrap break-keep">
              "당신의 시선이 머무는 곳에 호크아이안경이 함께 하겠습니다."
            </h2>
            <p className="text-sm text-gray-400 font-light leading-relaxed max-w-lg mx-auto">
