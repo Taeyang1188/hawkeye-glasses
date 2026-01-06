@@ -1,4 +1,3 @@
-
 import React from 'react';
 
 interface HeroProps {
@@ -8,12 +7,15 @@ interface HeroProps {
 const Hero: React.FC<HeroProps> = ({ onCtaClick }) => {
   return (
     <section className="relative flex flex-col md:h-[80vh] bg-gray-50 overflow-hidden">
-      {/* Image Area */}
+      {/* Image Area with Priority Hint */}
       <div className="relative h-[50vh] md:absolute md:inset-0 md:h-full">
         <img 
           src="https://images.unsplash.com/photo-1511499767150-a48a237f0083?auto=format&fit=crop&q=80&w=2000" 
           alt="Luxury Eyewear" 
           className="w-full h-full object-cover grayscale-[20%]"
+          /* Fix: Changed fetchpriority to fetchPriority for React compatibility */
+          fetchPriority="high"
+          loading="eager"
         />
         <div className="absolute inset-0 bg-black bg-opacity-10"></div>
       </div>

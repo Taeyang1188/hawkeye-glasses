@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Search, Heart, ShoppingBag, User, Menu, X, ChevronRight } from 'lucide-react';
 import { Category, FilterConfig } from '../App.tsx';
@@ -53,7 +52,6 @@ const Header: React.FC<HeaderProps> = ({
           <button className="md:hidden p-1" onClick={() => setIsMenuOpen(true)}>
             <Menu size={28} />
           </button>
-          {/* 상단 카테고리 메뉴 폰트 크기 확대: text-[13px] -> text-[15px] */}
           <div className="hidden md:flex space-x-8 text-[15px] font-bold uppercase tracking-widest">
             <button onClick={() => onNavigateShop({ category: '안경테', tab: 'ALL' })} className="hover:text-gray-500 transition-colors">안경테</button>
             <button onClick={() => onNavigateShop({ category: '렌즈', tab: 'ALL' })} className="hover:text-gray-500 transition-colors">렌즈</button>
@@ -63,18 +61,22 @@ const Header: React.FC<HeaderProps> = ({
         </div>
 
         <div className="absolute left-1/2 -translate-x-1/2 cursor-pointer" onClick={onNavigateHome}>
-          <img src="https://i.imgur.com/sTJufRT.png" alt="Hawkeye Optical Logo" className="h-10 md:h-12 w-auto object-contain" />
+          <img 
+            src="https://i.imgur.com/sTJufRT.png" 
+            alt="Hawkeye Optical Logo" 
+            className="h-10 md:h-12 w-auto object-contain" 
+            /* Fix: Changed fetchpriority to fetchPriority for React compatibility */
+            fetchPriority="high"
+          />
         </div>
 
         <div className="flex items-center space-x-4 md:space-x-6">
           <div className="hidden md:flex items-center border-b border-gray-300 py-1">
-            {/* 검색창 폰트 크기 확대: text-[13px] -> text-[14px] */}
             <input type="text" placeholder="찾고 계신 상품을 검색하세요" className="bg-transparent text-[14px] focus:outline-none w-32 xl:w-48 font-light" />
             <Search size={18} className="text-gray-400" />
           </div>
           <button onClick={onUserClick} className={`relative flex items-center space-x-2 ${isLoggedIn ? 'text-black' : 'text-gray-400 hover:text-black'}`}>
             <User size={20} />
-            {/* 사용자 이름 폰트 크기 확대: text-[12px] -> text-[13px] */}
             {isLoggedIn && <span className="hidden lg:inline text-[13px] font-bold uppercase tracking-tight">Peter Johnson</span>}
           </button>
           <button onClick={onNavigateWishlist} className="relative hover:text-gray-500 transition-colors">
@@ -88,7 +90,6 @@ const Header: React.FC<HeaderProps> = ({
         </div>
       </div>
 
-      {/* 하단 서비스 탭 폰트 크기 확대: text-[12px] -> text-[14px] */}
       <div className="hidden md:flex justify-center space-x-10 py-4 bg-white border-b border-gray-100 text-[14px] font-bold uppercase tracking-widest">
         <button onClick={() => onNavigateShop({ tab: 'NEW IN' })} className="text-red-600">NEW IN</button>
         <button onClick={() => onNavigateShop({ tab: '베스트셀러' })}>베스트셀러</button>
@@ -100,7 +101,6 @@ const Header: React.FC<HeaderProps> = ({
         <button onClick={onNavigateReviews}>LATEST REVIEW</button>
       </div>
 
-      {/* Mobile Menu Drawer */}
       <div className={`fixed inset-0 z-[100] transition-opacity duration-300 ${isMenuOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}`}>
         <div className="absolute inset-0 bg-black/40" onClick={() => setIsMenuOpen(false)} />
         <div className={`absolute top-0 left-0 h-full w-[85%] max-w-[340px] bg-white transition-transform duration-300 ease-out flex flex-col shadow-2xl ${isMenuOpen ? 'translate-x-0' : '-translate-x-full'}`}>

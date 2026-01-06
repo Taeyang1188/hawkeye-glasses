@@ -1,22 +1,17 @@
+
 {
-  "name": "호크아이안경-(hawkeye-optical)---myeongdong-best-optical-shop",
+  "name": "hawkeye-optical",
+  "version": "1.0.0",
   "private": true,
-  "version": "0.0.0",
-  "type": "module",
+  "description": "호크아이안경 - 명동 프리미엄 안경원 공식 웹사이트",
   "scripts": {
-    "dev": "vite",
-    "build": "vite build",
-    "preview": "vite preview"
+    "start": "npx serve -s . -l 8080"
   },
-  "dependencies": {
-    "react": "19.0.0",
-    "react-dom": "19.0.0",
-    "lucide-react": "0.460.0"
-  },
-  "devDependencies": {
-    "@types/node": "^22.14.0",
-    "@vitejs/plugin-react": "^5.0.0",
-    "typescript": "~5.8.2",
-    "vite": "^6.2.0"
-  }
+  "keywords": [
+    "hawkeye",
+    "optical",
+    "myeongdong"
+  ],
+  "author": "Hawkeye Optical",
+  "license": "ISC"
 }
