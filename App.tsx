@@ -60,6 +60,31 @@ const App: React.FC = () => {
     return () => subscription.unsubscribe();
   }, []);
 
+  // SEO: 페이지 뷰에 따른 브라우저 타이틀 동적 변경
+  useEffect(() => {
+    const titles: Record<string, string> = {
+      home: '호크아이안경 | 명동 안경원 추천 - 프리미엄 안경 & 정밀 검안',
+      shop: '아이웨어 컬렉션 | 호크아이안경 - 명동 프리미엄 안경테 & 렌즈',
+      huvits: 'HUVITS 정밀 검안 서비스 | 호크아이안경 - 최첨단 시력 측정',
+      fitting: '1:1 퍼스널 핏팅 서비스 | 호크아이안경 - 완벽한 안경 피팅',
+      brands: '브랜드관 | 호크아이안경 - 글로벌 명품 아이웨어 큐레이션',
+      'latest-review': '고객 리뷰 | 호크아이안경 - 명동 안경원 실제 착용 후기',
+      policy: '이용 가이드 & 정책 | 호크아이안경'
+    };
+    
+    document.title = titles[view] || '호크아이안경 | 명동 안경원';
+    
+    // 강력한 스크롤 상단 이동 로직
+    window.scrollTo({ top: 0, left: 0, behavior: 'instant' as any });
+    const timeoutId = setTimeout(() => {
+      window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
+      document.documentElement.scrollTop = 0;
+      document.body.scrollTop = 0;
+    }, 10);
+    
+    return () => clearTimeout(timeoutId);
+  }, [view, shopFilter]);
+
   const fetchProductStats = async () => {
     const { data, error } = await supabase.from('products').select('id, view_count');
     if (!error && data) {
@@ -75,21 +100,6 @@ const App: React.FC = () => {
       setWishlist(data.map(item => item.product_id));
     }
   };
-
-  // 강력한 스크롤 상단 이동 로직 (모든 뷰 전환에 대응)
-  useEffect(() => {
-    // 1. 즉각적인 이동 시도
-    window.scrollTo({ top: 0, left: 0, behavior: 'instant' as any });
-    
-    // 2. 브라우저 렌더링 주기와 레이아웃 시프트를 고려한 이중 보정
-    const timeoutId = setTimeout(() => {
-      window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
-      document.documentElement.scrollTop = 0;
-      document.body.scrollTop = 0;
-    }, 10);
-    
-    return () => clearTimeout(timeoutId);
-  }, [view, shopFilter]);
 
   const navigateToShop = (config: FilterConfig = { category: '안경테', tab: 'ALL' }) => {
     setShopFilter(config);

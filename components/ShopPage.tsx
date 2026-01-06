@@ -35,11 +35,7 @@ const ShopPage: React.FC<ShopPageProps> = ({ initialConfig, wishlist, toggleWish
   const [searchQuery, setSearchQuery] = useState(initialConfig.search || '');
   const [selectedProductId, setSelectedProductId] = useState<number | null>(null);
 
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, [selectedProductId, activeCategory, activeTab]);
-
-  // 백엔드에서 실제 상품 데이터 가져오기
+  // 백엔드 데이터 패칭
   useEffect(() => {
     const fetchProducts = async () => {
       setLoading(true);
@@ -71,6 +67,13 @@ const ShopPage: React.FC<ShopPageProps> = ({ initialConfig, wishlist, toggleWish
   }, [initialConfig]);
 
   const selectedProduct = useMemo(() => products.find(p => p.id === selectedProductId), [selectedProductId, products]);
+
+  // SEO: 상품 상세 진입 시 타이틀 변경
+  useEffect(() => {
+    if (selectedProduct) {
+      document.title = `${selectedProduct.brand} ${selectedProduct.name} | 호크아이안경 프리미엄 컬렉션`;
+    }
+  }, [selectedProduct]);
 
   const handleProductClick = (id: number) => {
     onProductView(id);
@@ -119,7 +122,11 @@ const ShopPage: React.FC<ShopPageProps> = ({ initialConfig, wishlist, toggleWish
           </div>
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-20">
             <div className="lg:col-span-7 aspect-[4/5] bg-gray-50 overflow-hidden">
-              <img src={selectedProduct.image_url} className="w-full h-full object-cover hover:scale-105 transition-transform duration-1000" alt={selectedProduct.name} />
+              <img 
+                src={selectedProduct.image_url} 
+                className="w-full h-full object-cover hover:scale-105 transition-transform duration-1000" 
+                alt={`${selectedProduct.brand} ${selectedProduct.name} - 명동 호크아이안경 상세 이미지`} 
+              />
             </div>
             <div className="lg:col-span-5 space-y-12">
               <div className="space-y-6">
@@ -139,7 +146,8 @@ const ShopPage: React.FC<ShopPageProps> = ({ initialConfig, wishlist, toggleWish
                   <span>{isWished ? "WISHLISTED" : "ADD TO WISHLIST"}</span>
                 </button>
               </div>
-              <div className="pt-12 border-t border-gray-100 space-y-6">
+              <div className="pt-12 border-t border-gray-100 space-y-6 text-sm text-gray-500 font-light leading-relaxed">
+                <p>호크아이안경의 모든 제품은 17년 경력 안경사의 정밀한 검수와 핏팅 과정을 거쳐 배송됩니다. 매장 방문 시 1:1 맞춤 피팅 서비스를 받으실 수 있습니다.</p>
                 <div className="flex items-center space-x-3">
                   <div className="flex items-center space-x-2 bg-red-50 px-3 py-1 rounded-full animate-pulse">
                     <div className="w-1.5 h-1.5 bg-red-600 rounded-full"></div>
@@ -179,7 +187,11 @@ const ShopPage: React.FC<ShopPageProps> = ({ initialConfig, wishlist, toggleWish
           {filteredProducts.map(product => (
             <div key={product.id} className="group cursor-pointer" onClick={() => handleProductClick(product.id)}>
               <div className="relative aspect-[3/4] bg-gray-50 mb-4 overflow-hidden">
-                <img src={product.image_url} className="w-full h-full object-cover group-hover:scale-105 transition-all duration-700" alt={product.name} />
+                <img 
+                  src={product.image_url} 
+                  className="w-full h-full object-cover group-hover:scale-105 transition-all duration-700" 
+                  alt={`${product.brand} ${product.name} - 명동안경 호크아이 아이웨어`} 
+                />
               </div>
               <p className="text-[10px] uppercase font-bold text-gray-400 tracking-widest mb-1">{product.brand}</p>
               <h3 className="text-sm font-medium mb-1">{product.name}</h3>

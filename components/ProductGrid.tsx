@@ -11,7 +11,6 @@ interface Product {
 }
 
 interface ProductGridProps {
-  // Fix: Added productId parameter to onDetailClick to match usage in App.tsx
   onDetailClick: (productId: number) => void;
 }
 
@@ -53,12 +52,11 @@ const ProductGrid: React.FC<ProductGridProps> = ({ onDetailClick }) => {
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
       {products.map((product) => (
-        // Fix: Pass product.id to onDetailClick
         <div key={product.id} className="group cursor-pointer" onClick={() => onDetailClick(product.id)}>
           <div className="relative aspect-[3/4] bg-gray-100 mb-4 overflow-hidden">
             <img 
               src={product.image} 
-              alt={product.name} 
+              alt={`${product.brand} ${product.name} - 명동안경 호크아이 추천 아이웨어`} 
               className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
             />
             {product.tag && (
