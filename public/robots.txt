@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /admin-dashboard
+Disallow: /admin-login
+
+Sitemap: https://hawkeye-glasses.netlify.app/sitemap.xml
