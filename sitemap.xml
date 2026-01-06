@@ -2,31 +2,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://hawkeye-optical.com/</loc>
+    <loc>https://hawkeye-glasses.netlify.app/</loc>
     <lastmod>2024-05-22</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://hawkeye-optical.com/shop</loc>
+    <loc>https://hawkeye-glasses.netlify.app/shop</loc>
     <lastmod>2024-05-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://hawkeye-optical.com/huvitz-service</loc>
+    <loc>https://hawkeye-glasses.netlify.app/huvitz-service</loc>
     <lastmod>2024-05-22</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://hawkeye-optical.com/fitting-service</loc>
+    <loc>https://hawkeye-glasses.netlify.app/fitting-service</loc>
     <lastmod>2024-05-22</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://hawkeye-optical.com/brands</loc>
+    <loc>https://hawkeye-glasses.netlify.app/brands</loc>
     <lastmod>2024-05-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>

@@ -18,7 +18,8 @@ const MyPage: React.FC<MyPageProps> = ({ user, hasCoupon, onDownloadCoupon, onLo
   const [isCopied, setIsCopied] = useState(false);
   const [couponExpiry, setCouponExpiry] = useState<string>('2024.12.31');
 
-  const referralLink = `https://hawkeye-optical.com/m/ol/ip2ht-${user.name.toLowerCase().replace(/\s/g, '-')}`;
+  // 도메인 주소 업데이트
+  const referralLink = `https://hawkeye-glasses.netlify.app/m/ol/ip2ht-${user.name.toLowerCase().replace(/\s/g, '-')}`;
 
   const handleDownload = () => {
     const now = new Date();
