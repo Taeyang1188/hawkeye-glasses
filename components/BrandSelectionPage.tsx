@@ -3,14 +3,14 @@ import React, { useState, useMemo } from 'react';
 import { Search, X } from 'lucide-react';
 
 const brands = [
-  { name: 'Gentle Monster', nameKo: '젠틀몬스터', logo: 'https://i.imgur.com/qxDnVCn.png', country: 'South Korea' },
-  { name: 'Gucci', nameKo: '구찌', logo: 'https://i.imgur.com/GpTjvgm.png', country: 'Italy' },
-  { name: 'Prada', nameKo: '프라다', logo: 'https://i.imgur.com/BOauoPu.png', country: 'Italy' },
-  { name: 'Saint Laurent', nameKo: '생로랑', logo: 'https://i.imgur.com/gZbvS7c.png', country: 'France' },
-  { name: 'Cartier', nameKo: '까르띠에', logo: 'https://i.imgur.com/GQ9rHae.png', country: 'France' },
-  { name: 'Tom Ford', nameKo: '톰포드', logo: 'https://i.imgur.com/ahxCcAH.png', country: 'USA' },
-  { name: 'Oliver Peoples', nameKo: '올리버피플스', logo: 'https://i.imgur.com/xT4wx2f.png', country: 'USA' },
-  { name: 'Lindberg', nameKo: '린드버그', logo: 'https://i.imgur.com/d0NMS52.png', country: 'Denmark' }
+  { name: 'Four Nines', nameKo: '포나인즈', logo: 'https://i.imgur.com/luChXlh.png', country: 'Japan' },
+  { name: 'Silhouette', nameKo: '실루엣', logo: 'https://i.imgur.com/fszXYXh.png', country: 'Austria' },
+  { name: 'Viktor & Rolf', nameKo: '빅터앤롤프', logo: 'https://i.imgur.com/VCmPkpT.png', country: 'Netherlands' },
+  { name: 'Oakley', nameKo: '오클리', logo: 'https://i.imgur.com/x1srvm7.png', country: 'USA' },
+  { name: 'Rawrow', nameKo: '로우로우', logo: 'https://i.imgur.com/jD4GyxQ.png', country: 'South Korea' },
+  { name: 'Venetique', nameKo: '베네티크', logo: 'https://i.imgur.com/EPFPRDL.png', country: 'South Korea' },
+  { name: 'Piovino', nameKo: '피오비노', logo: 'https://i.imgur.com/GrrbGs9.png', country: 'South Korea' },
+  { name: 'Black Monster', nameKo: '블랙몬스터', logo: 'https://i.imgur.com/R2MPUbd.png', country: 'South Korea' }
 ];
 
 interface BrandSelectionPageProps {
@@ -45,7 +45,7 @@ const BrandSelectionPage: React.FC<BrandSelectionPageProps> = ({ onBrandSelect }
               type="text" 
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              placeholder="찾으시는 브랜드 (Gucci, 젠틀몬스터...)" 
+              placeholder="찾으시는 브랜드 (오클리, 로우로우...)" 
               className="w-full border-b border-gray-300 py-3 text-xs uppercase tracking-widest focus:outline-none focus:border-black transition-colors bg-transparent pr-10"
              />
              <div className="absolute right-0 bottom-3 flex items-center space-x-2">

@@ -21,7 +21,6 @@ const Footer: React.FC = () => {
               Precision, style, and care for your vision.
             </p>
             <div className="flex space-x-4">
-              {/* Instagram 버튼 추가 및 순서 조정: 인스타 -> B -> N -> F */}
               <a 
                 href="https://www.instagram.com/hawk_eye_optical/" 
                 target="_blank" 
@@ -64,9 +63,12 @@ const Footer: React.FC = () => {
                 <Phone size={18} className="shrink-0 text-white" />
                 <span>02-3789-0691</span>
               </div>
-              <div className="flex items-center space-x-3">
-                <Clock size={18} className="shrink-0 text-white" />
-                <span>월-일: 10:00 - 20:00 (명절 휴무)</span>
+              <div className="flex items-start space-x-3">
+                <Clock size={18} className="shrink-0 mt-0.5 text-white" />
+                <div className="flex flex-col space-y-0.5">
+                  <span>월-토: 10:00 - 19:00</span>
+                  <span className="text-red-500 font-medium">일요일: 정기휴무</span>
+                </div>
               </div>
             </div>
           </div>

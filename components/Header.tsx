@@ -50,8 +50,8 @@ const Header: React.FC<HeaderProps> = ({
     <header className="sticky top-0 z-50 bg-white border-b border-gray-100">
       <div className="max-w-[1400px] mx-auto px-6 py-4 flex items-center justify-between">
         <div className="flex items-center space-x-6">
-          <button className="md:hidden" onClick={() => setIsMenuOpen(true)}>
-            <Menu size={24} />
+          <button className="md:hidden p-1" onClick={() => setIsMenuOpen(true)}>
+            <Menu size={28} />
           </button>
           <div className="hidden md:flex space-x-6 text-[11px] font-bold uppercase tracking-widest">
             <button onClick={() => onNavigateShop({ category: '안경테', tab: 'ALL' })} className="hover:text-gray-500 transition-colors">안경테</button>
@@ -99,44 +99,44 @@ const Header: React.FC<HeaderProps> = ({
       {/* Mobile Menu Drawer */}
       <div className={`fixed inset-0 z-[100] transition-opacity duration-300 ${isMenuOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}`}>
         <div className="absolute inset-0 bg-black/40" onClick={() => setIsMenuOpen(false)} />
-        <div className={`absolute top-0 left-0 h-full w-[85%] max-w-[320px] bg-white transition-transform duration-300 ease-out flex flex-col shadow-2xl ${isMenuOpen ? 'translate-x-0' : '-translate-x-full'}`}>
+        <div className={`absolute top-0 left-0 h-full w-[85%] max-w-[340px] bg-white transition-transform duration-300 ease-out flex flex-col shadow-2xl ${isMenuOpen ? 'translate-x-0' : '-translate-x-full'}`}>
           <div className="p-6 border-b border-gray-100 flex justify-between items-center">
-             <img src="https://i.imgur.com/sTJufRT.png" alt="Hawkeye Logo" className="h-8 w-auto object-contain" />
-             <button onClick={() => setIsMenuOpen(false)} className="p-2"><X size={24} /></button>
+             <img src="https://i.imgur.com/sTJufRT.png" alt="Hawkeye Logo" className="h-10 w-auto object-contain" />
+             <button onClick={() => setIsMenuOpen(false)} className="p-2"><X size={28} /></button>
           </div>
           
           <div className="flex-grow overflow-y-auto">
-            <div className="p-6 space-y-8">
-              <div className="space-y-4">
-                <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-gray-400">Categories</p>
-                <div className="flex flex-col space-y-4">
+            <div className="p-8 space-y-12">
+              <div className="space-y-6">
+                <p className="text-xs font-bold uppercase tracking-[0.3em] text-gray-400">Categories</p>
+                <div className="flex flex-col space-y-6">
                   {['안경테', '렌즈', '선글라스', '콘택트렌즈'].map(cat => (
-                    <button key={cat} onClick={() => handleMobileNav({ category: cat as Category, tab: 'ALL' })} className="flex justify-between items-center text-sm font-medium uppercase tracking-widest text-left">
-                      <span>{cat}</span> <ChevronRight size={16} className="text-gray-300" />
+                    <button key={cat} onClick={() => handleMobileNav({ category: cat as Category, tab: 'ALL' })} className="flex justify-between items-center text-lg font-medium uppercase tracking-[0.1em] text-left">
+                      <span>{cat}</span> <ChevronRight size={20} className="text-gray-300" />
                     </button>
                   ))}
                 </div>
               </div>
 
-              <div className="space-y-4 pt-4 border-t border-gray-50">
-                <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-gray-400">Discover</p>
-                <div className="flex flex-col space-y-4">
-                  <button onClick={() => handleMobileNav({ tab: 'NEW IN' })} className="text-sm font-medium uppercase tracking-widest text-left text-red-600">NEW IN</button>
-                  <button onClick={() => handleMobileNav({ tab: '베스트셀러' })} className="text-sm font-medium uppercase tracking-widest text-left">베스트셀러</button>
-                  <button onClick={() => handleMobileNav({ category: '안경테', tab: '무테 컬렉션' })} className="text-sm font-medium uppercase tracking-widest text-left">무테 컬렉션</button>
-                  <button onClick={() => handleMobileNav({ category: '렌즈', tab: '프리미엄 렌즈' })} className="text-sm font-medium uppercase tracking-widest text-left">프리미엄 렌즈</button>
-                  <button onClick={() => handleMobileNav('huvits')} className="text-sm font-medium uppercase tracking-widest text-left">HUVITS 정밀검안</button>
-                  <button onClick={() => handleMobileNav('fitting')} className="text-sm font-medium uppercase tracking-widest text-left">1:1 핏팅서비스</button>
-                  <button onClick={() => handleMobileNav('brands')} className="text-sm font-medium uppercase tracking-widest text-left">브랜드관</button>
-                  <button onClick={() => handleMobileNav('latest-review')} className="text-sm font-medium uppercase tracking-widest text-left">LATEST REVIEW</button>
+              <div className="space-y-6 pt-8 border-t border-gray-50">
+                <p className="text-xs font-bold uppercase tracking-[0.3em] text-gray-400">Discover</p>
+                <div className="flex flex-col space-y-6">
+                  <button onClick={() => handleMobileNav({ tab: 'NEW IN' })} className="text-lg font-bold uppercase tracking-[0.1em] text-left text-red-600">NEW IN</button>
+                  <button onClick={() => handleMobileNav({ tab: '베스트셀러' })} className="text-lg font-medium uppercase tracking-[0.1em] text-left">베스트셀러</button>
+                  <button onClick={() => handleMobileNav({ category: '안경테', tab: '무테 컬렉션' })} className="text-lg font-medium uppercase tracking-[0.1em] text-left">무테 컬렉션</button>
+                  <button onClick={() => handleMobileNav({ category: '렌즈', tab: '프리미엄 렌즈' })} className="text-lg font-medium uppercase tracking-[0.1em] text-left">프리미엄 렌즈</button>
+                  <button onClick={() => handleMobileNav('huvits')} className="text-lg font-medium uppercase tracking-[0.1em] text-left">HUVITS 정밀검안</button>
+                  <button onClick={() => handleMobileNav('fitting')} className="text-lg font-medium uppercase tracking-[0.1em] text-left">1:1 핏팅서비스</button>
+                  <button onClick={() => handleMobileNav('brands')} className="text-lg font-medium uppercase tracking-[0.1em] text-left">브랜드관</button>
+                  <button onClick={() => handleMobileNav('latest-review')} className="text-lg font-medium uppercase tracking-[0.1em] text-left">LATEST REVIEW</button>
                 </div>
               </div>
             </div>
           </div>
 
-          <div className="p-6 border-t border-gray-100 bg-gray-50">
-            <button onClick={() => handleMobileNav('home')} className="w-full text-xs font-bold uppercase tracking-[0.2em] py-4 border border-black text-center mb-3">홈으로 가기</button>
-            <div className="flex justify-between items-center text-[10px] text-gray-400 uppercase tracking-widest font-bold">
+          <div className="p-8 border-t border-gray-100 bg-gray-50">
+            <button onClick={() => handleMobileNav('home')} className="w-full text-sm font-bold uppercase tracking-[0.2em] py-5 border border-black text-center mb-4 hover:bg-black hover:text-white transition-all">홈으로 가기</button>
+            <div className="flex justify-between items-center text-[11px] text-gray-500 uppercase tracking-widest font-bold">
               <span>Customer Support</span>
               <span>02-3789-0691</span>
             </div>

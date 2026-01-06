@@ -127,7 +127,8 @@ const ShopPage: React.FC<ShopPageProps> = ({ initialConfig, wishlist, toggleWish
       result = result.filter(p => p.category === '렌즈' && p.isPremium);
     }
 
-    Object.entries(selectedFilters).forEach(([group, values]) => {
+    // Cast entries to ensure values are recognized as string[] to avoid 'unknown' type errors
+    (Object.entries(selectedFilters) as [string, string[]][]).forEach(([group, values]) => {
       if (values.length > 0) result = result.filter(p => values.includes(p.filters[group]));
     });
 

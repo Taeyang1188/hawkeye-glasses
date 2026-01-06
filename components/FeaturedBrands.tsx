@@ -2,14 +2,14 @@
 import React from 'react';
 
 const brands = [
-  { name: 'Gentle Monster', logo: 'https://i.imgur.com/qxDnVCn.png' },
-  { name: 'Gucci', logo: 'https://i.imgur.com/GpTjvgm.png' },
-  { name: 'Prada', logo: 'https://i.imgur.com/BOauoPu.png' },
-  { name: 'Saint Laurent', logo: 'https://i.imgur.com/gZbvS7c.png' },
-  { name: 'Cartier', logo: 'https://i.imgur.com/GQ9rHae.png' },
-  { name: 'Tom Ford', logo: 'https://i.imgur.com/ahxCcAH.png' },
-  { name: 'Oliver Peoples', logo: 'https://i.imgur.com/xT4wx2f.png' },
-  { name: 'Lindberg', logo: 'https://i.imgur.com/d0NMS52.png' }
+  { name: 'Four Nines', logo: 'https://i.imgur.com/luChXlh.png' },
+  { name: 'Silhouette', logo: 'https://i.imgur.com/fszXYXh.png' },
+  { name: 'Viktor & Rolf', logo: 'https://i.imgur.com/VCmPkpT.png' },
+  { name: 'Oakley', logo: 'https://i.imgur.com/x1srvm7.png' },
+  { name: 'Rawrow', logo: 'https://i.imgur.com/jD4GyxQ.png' },
+  { name: 'Venetique', logo: 'https://i.imgur.com/EPFPRDL.png' },
+  { name: 'Piovino', logo: 'https://i.imgur.com/GrrbGs9.png' },
+  { name: 'Black Monster', logo: 'https://i.imgur.com/R2MPUbd.png' }
 ];
 
 interface FeaturedBrandsProps {
