@@ -1,4 +1,3 @@
-
 import React, { useMemo } from 'react';
 import { LayoutDashboard, Users, LogOut, TrendingUp, Calendar } from 'lucide-react';
 
@@ -7,17 +6,22 @@ interface AdminDashboardProps {
 }
 
 const AdminDashboard: React.FC<AdminDashboardProps> = ({ onLogout }) => {
-  // 자체 방문자 데이터 불러오기
+  // 자체 방문자 데이터 불러오기 (예외 처리 추가)
   const visitorStats = useMemo(() => {
-    const statsStr = localStorage.getItem('hawkeye_visitor_stats');
-    if (!statsStr) return [];
-    
-    const stats = JSON.parse(statsStr);
-    // 최근 7일 데이터만 정렬해서 추출
-    return Object.entries(stats)
-      .sort((a, b) => b[0].localeCompare(a[0]))
-      .slice(0, 7)
-      .map(([date, count]) => ({ date, count: count as number }));
+    try {
+      const statsStr = localStorage.getItem('hawkeye_visitor_stats');
+      if (!statsStr) return [];
+      
+      const stats = JSON.parse(statsStr);
+      // 최근 7일 데이터만 정렬해서 추출
+      return Object.entries(stats)
+        .sort((a, b) => b[0].localeCompare(a[0]))
+        .slice(0, 7)
+        .map(([date, count]) => ({ date, count: count as number }));
+    } catch (e) {
+      console.error('Failed to load visitor stats', e);
+      return [];
+    }
   }, []);
 
   const totalVisitors = visitorStats.reduce((sum, item) => sum + item.count, 0);

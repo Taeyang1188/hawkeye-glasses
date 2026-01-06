@@ -11,8 +11,10 @@
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <base href="/" />
     
-    <!-- Google Search Console Verification (Moved to top for faster detection) -->
+    <!-- Site Verification Tags -->
+    <meta name="naver-site-verification" content="8182b2b3c4b517e43719d7a9fa94049672796fe2" />
     <meta name="google-site-verification" content="gqZzyngUsnFgWPR3DqQ-zP8WzZ-OXuRB31Bq8OIdj9c" />
     
     <!-- Priority Hints & Preconnect -->
@@ -93,7 +95,6 @@
 
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
-    <script src="https://accounts.google.com/gsi/client" async defer></script>
     <style>
         body {
             font-family: 'Inter', 'Noto Sans KR', sans-serif;
@@ -124,7 +125,6 @@
     height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <!-- End Google Tag Manager (noscript) -->
     <div id="root"></div>
-    <!-- Script Priority Hint: 메인 모듈 로딩 우선순위 상향 -->
-    <script type="module" src="./index.tsx" fetchpriority="high"></script>
+    <script type="module" src="/index.tsx" fetchpriority="high"></script>
 </body>
 </html>

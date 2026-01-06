@@ -1,4 +1,3 @@
-
 import { createClient } from '@supabase/supabase-js';
 
 const supabaseUrl = 'https://nnbhdmqloykcvmcrkkzf.supabase.co';
@@ -12,9 +11,11 @@ export const supabase = createClient(supabaseUrl, supabaseAnonKey);
  */
 export const testConnection = async () => {
   try {
-    const { data, error } = await supabase.from('products').select('count').limit(1);
+    // .select('count')는 count라는 컬럼을 찾는 것이므로 오류가 날 수 있음.
+    // .select('*', { count: 'exact', head: true }) 또는 단순히 데이터 한건을 조회.
+    const { data, error } = await supabase.from('products').select('*').limit(1);
     if (error) throw error;
-    console.log('✅ Supabase 연결 성공:', data);
+    console.log('✅ Supabase 연결 성공');
     return true;
   } catch (err) {
     console.error('❌ Supabase 연결 실패:', err);

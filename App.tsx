@@ -29,8 +29,25 @@ export type FilterConfig = {
   search?: string;
 };
 
+type ViewType = 'home' | 'shop' | 'cart' | 'wishlist' | 'mypage' | 'huvits' | 'fitting' | 'brands' | 'latest-review' | 'admin-login' | 'admin-dashboard' | 'policy';
+
 const App: React.FC = () => {
-  const [view, setView] = useState<'home' | 'shop' | 'cart' | 'wishlist' | 'mypage' | 'huvits' | 'fitting' | 'brands' | 'latest-review' | 'admin-login' | 'admin-dashboard' | 'policy'>('home');
+  // URL 경로를 기반으로 초기 view 결정
+  const getInitialView = (): ViewType => {
+    const path = window.location.pathname;
+    if (path === '/shop') return 'shop';
+    if (path === '/cart') return 'cart';
+    if (path === '/wishlist') return 'wishlist';
+    if (path === '/huvitz-service') return 'huvits';
+    if (path === '/fitting-service') return 'fitting';
+    if (path === '/brands') return 'brands';
+    if (path === '/reviews') return 'latest-review';
+    if (path === '/policy') return 'policy';
+    if (path === '/admin-login') return 'admin-login';
+    return 'home';
+  };
+
+  const [view, setView] = useState<ViewType>(getInitialView());
   const [shopFilter, setShopFilter] = useState<FilterConfig>({ category: '안경테', tab: 'ALL' });
   const [wishlist, setWishlist] = useState<number[]>([]);
   const [cart, setCart] = useState<number[]>([]);
@@ -57,10 +74,19 @@ const App: React.FC = () => {
       }
     });
 
-    return () => subscription.unsubscribe();
+    // 브라우저 뒤로가기/앞으로가기 대응
+    const handlePopState = () => {
+      setView(getInitialView());
+    };
+    window.addEventListener('popstate', handlePopState);
+
+    return () => {
+      subscription.unsubscribe();
+      window.removeEventListener('popstate', handlePopState);
+    };
   }, []);
 
-  // SEO: 페이지 뷰에 따른 브라우저 타이틀 동적 변경
+  // View 변경 시 URL 업데이트 및 SEO 타이틀 설정
   useEffect(() => {
     const titles: Record<string, string> = {
       home: '호크아이안경 | 명동 안경원 추천 - 프리미엄 안경 & 정밀 검안',
@@ -73,17 +99,28 @@ const App: React.FC = () => {
     };
     
     document.title = titles[view] || '호크아이안경 | 명동 안경원';
+
+    // URL 경로 업데이트 (view 상태와 매핑)
+    const viewToPath: Record<string, string> = {
+      home: '/',
+      shop: '/shop',
+      cart: '/cart',
+      wishlist: '/wishlist',
+      huvits: '/huvitz-service',
+      fitting: '/fitting-service',
+      brands: '/brands',
+      'latest-review': '/reviews',
+      policy: '/policy',
+      'admin-login': '/admin-login'
+    };
+
+    const targetPath = viewToPath[view] || '/';
+    if (window.location.pathname !== targetPath) {
+      window.history.pushState({}, '', targetPath);
+    }
     
-    // 강력한 스크롤 상단 이동 로직
-    window.scrollTo({ top: 0, left: 0, behavior: 'instant' as any });
-    const timeoutId = setTimeout(() => {
-      window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
-      document.documentElement.scrollTop = 0;
-      document.body.scrollTop = 0;
-    }, 10);
-    
-    return () => clearTimeout(timeoutId);
-  }, [view, shopFilter]);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }, [view]);
 
   const fetchProductStats = async () => {
     const { data, error } = await supabase.from('products').select('id, view_count');
