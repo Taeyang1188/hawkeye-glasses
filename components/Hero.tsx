@@ -1,3 +1,4 @@
+
 import React from 'react';
 
 interface HeroProps {
@@ -11,9 +12,8 @@ const Hero: React.FC<HeroProps> = ({ onCtaClick }) => {
       <div className="relative h-[50vh] md:absolute md:inset-0 md:h-full">
         <img 
           src="https://images.unsplash.com/photo-1511499767150-a48a237f0083?auto=format&fit=crop&q=80&w=2000" 
-          alt="Luxury Eyewear" 
+          alt="명동 호크아이안경 프리미엄 아이웨어 컬렉션" 
           className="w-full h-full object-cover grayscale-[20%]"
-          /* Fix: Changed fetchpriority to fetchPriority for React compatibility */
           fetchPriority="high"
           loading="eager"
         />

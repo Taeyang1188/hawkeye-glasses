@@ -28,8 +28,9 @@
     <link rel="preconnect" href="https://images.unsplash.com">
     <link rel="preconnect" href="https://esm.sh">
     
-    <!-- RSS Feed Discovery -->
+    <!-- RSS & Sitemap Discovery -->
     <link rel="alternate" type="application/rss+xml" title="호크아이안경 최신 소식 및 제품 업데이트" href="/rss.xml" />
+    <link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml" />
     
     <!-- SEO Meta Tags -->
     <title>호크아이안경 | 명동 안경원 추천 - Myeongdong Optical Shop Hawkeye</title>
@@ -44,13 +45,56 @@
     <meta property="og:image" content="https://i.imgur.com/AyzWnq6.jpeg">
     <meta property="og:url" content="https://hawkeye-optical.com">
 
+    <!-- Structured Data (JSON-LD) for Local Business -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "OpticalBusiness",
+      "name": "호크아이안경 (Hawkeye Optical)",
+      "image": "https://i.imgur.com/AyzWnq6.jpeg",
+      "@id": "https://hawkeye-optical.com",
+      "url": "https://hawkeye-optical.com",
+      "telephone": "02-3789-0691",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "소공로 102 소공지하쇼핑센터 30호",
+        "addressLocality": "서울",
+        "addressRegion": "중구",
+        "postalCode": "04526",
+        "addressCountry": "KR"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 37.5644,
+        "longitude": 126.9790
+      },
+      "openingHoursSpecification": {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": [
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday",
+          "Saturday"
+        ],
+        "opens": "10:00",
+        "closes": "19:00"
+      },
+      "sameAs": [
+        "https://www.instagram.com/hawk_eye_optical/",
+        "https://blog.naver.com/hawkeye_optical"
+      ],
+      "priceRange": "$$"
+    }
+    </script>
+
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
     <script src="https://accounts.google.com/gsi/client" async defer></script>
     <style>
         body {
             font-family: 'Inter', 'Noto Sans KR', sans-serif;
-            scroll-behavior: smooth;
         }
         .farfetch-font {
             letter-spacing: -0.02em;

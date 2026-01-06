@@ -65,7 +65,7 @@ const ServiceInfo: React.FC = () => {
           <div className="relative aspect-square md:aspect-[4/5] overflow-hidden group">
             <img 
               src="https://i.imgur.com/AyzWnq6.jpeg" 
-              alt="Hawkeye Optical Myeongdong Interior" 
+              alt="호크아이안경 명동점 매장 내부 및 정밀 검안 장비" 
               className="w-full h-full object-cover grayscale transition-all duration-700 group-hover:grayscale-0 group-hover:scale-105"
             />
             <div className="absolute inset-0 border-[20px] border-black opacity-20 pointer-events-none"></div>
