@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { Search, Heart, ShoppingBag, User, Menu, X, ChevronRight } from 'lucide-react';
 import { Category, FilterConfig } from '../App.tsx';
@@ -12,6 +13,7 @@ interface HeaderProps {
   onNavigateBrands: () => void;
   onNavigateReviews: () => void;
   onUserClick: () => void;
+  onSearch: (query: string) => void;
   wishlistCount: number;
   cartCount: number;
   isLoggedIn: boolean;
@@ -27,11 +29,13 @@ const Header: React.FC<HeaderProps> = ({
   onNavigateBrands,
   onNavigateReviews,
   onUserClick,
+  onSearch,
   wishlistCount, 
   cartCount,
   isLoggedIn
 }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [searchQuery, setSearchQuery] = useState('');
 
   const handleMobileNav = (config?: FilterConfig | 'home' | 'cart' | 'wishlist' | 'huvits' | 'fitting' | 'brands' | 'latest-review') => {
     setIsMenuOpen(false);
@@ -43,6 +47,14 @@ const Header: React.FC<HeaderProps> = ({
     else if (config === 'brands') onNavigateBrands();
     else if (config === 'latest-review') onNavigateReviews();
     else onNavigateShop(config as FilterConfig);
+  };
+
+  const handleSearchSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (searchQuery.trim()) {
+      onSearch(searchQuery.trim());
+      setSearchQuery('');
+    }
   };
 
   return (
@@ -65,19 +77,26 @@ const Header: React.FC<HeaderProps> = ({
             src="https://i.imgur.com/sTJufRT.png" 
             alt="Hawkeye Optical Logo" 
             className="h-10 md:h-12 w-auto object-contain" 
-            /* Fix: Changed fetchpriority to fetchPriority for React compatibility */
             fetchPriority="high"
           />
         </div>
 
         <div className="flex items-center space-x-4 md:space-x-6">
-          <div className="hidden md:flex items-center border-b border-gray-300 py-1">
-            <input type="text" placeholder="찾고 계신 상품을 검색하세요" className="bg-transparent text-[14px] focus:outline-none w-32 xl:w-48 font-light" />
-            <Search size={18} className="text-gray-400" />
-          </div>
+          <form onSubmit={handleSearchSubmit} className="hidden md:flex items-center border-b border-gray-300 py-1">
+            <input 
+              type="text" 
+              placeholder="검색어를 입력하세요" 
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className="bg-transparent text-[14px] focus:outline-none w-32 xl:w-48 font-light" 
+            />
+            <button type="submit">
+              <Search size={18} className="text-gray-400 hover:text-black transition-colors" />
+            </button>
+          </form>
           <button onClick={onUserClick} className={`relative flex items-center space-x-2 ${isLoggedIn ? 'text-black' : 'text-gray-400 hover:text-black'}`}>
             <User size={20} />
-            {isLoggedIn && <span className="hidden lg:inline text-[13px] font-bold uppercase tracking-tight">Peter Johnson</span>}
+            {isLoggedIn && <span className="hidden lg:inline text-[13px] font-bold uppercase tracking-tight">Master Admin</span>}
           </button>
           <button onClick={onNavigateWishlist} className="relative hover:text-gray-500 transition-colors">
             <Heart size={20} />
@@ -111,6 +130,19 @@ const Header: React.FC<HeaderProps> = ({
           
           <div className="flex-grow overflow-y-auto">
             <div className="p-8 space-y-12">
+              <div className="space-y-6">
+                <form onSubmit={handleSearchSubmit} className="flex items-center border-b border-gray-300 py-2">
+                  <input 
+                    type="text" 
+                    placeholder="상품명, 브랜드 검색" 
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    className="bg-transparent text-lg focus:outline-none w-full font-light" 
+                  />
+                  <button type="submit"><Search size={22} className="text-gray-400" /></button>
+                </form>
+              </div>
+
               <div className="space-y-6">
                 <p className="text-xs font-bold uppercase tracking-[0.3em] text-gray-400">Categories</p>
                 <div className="flex flex-col space-y-6">

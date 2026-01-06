@@ -1,5 +1,6 @@
 
 import React, { useState, useEffect } from 'react';
+import { supabase, testConnection } from './lib/supabase.ts';
 import Header from './components/Header.tsx';
 import Hero from './components/Hero.tsx';
 import FeaturedBrands from './components/FeaturedBrands.tsx';
@@ -17,12 +18,14 @@ import BrandSelectionPage from './components/BrandSelectionPage.tsx';
 import LatestReview from './components/LatestReview.tsx';
 import AdminLogin from './components/AdminLogin.tsx';
 import AdminDashboard from './components/AdminDashboard.tsx';
+import ConsultationFAB from './components/ConsultationFAB.tsx';
 
 export type Category = '안경테' | '렌즈' | '선글라스' | '콘택트렌즈';
 export type FilterConfig = {
   category?: Category;
   tab?: 'NEW IN' | '베스트셀러' | '무테 컬렉션' | '프리미엄 렌즈' | 'ALL';
   brand?: string;
+  search?: string;
 };
 
 const App: React.FC = () => {
@@ -30,50 +33,83 @@ const App: React.FC = () => {
   const [shopFilter, setShopFilter] = useState<FilterConfig>({ category: '안경테', tab: 'ALL' });
   const [wishlist, setWishlist] = useState<number[]>([]);
   const [cart, setCart] = useState<number[]>([]);
-  const [user, setUser] = useState<{ name: string; email: string } | null>(null);
+  const [user, setUser] = useState<{ name: string; email: string; id: string } | null>(null);
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
   const [hasWelcomeCoupon, setHasWelcomeCoupon] = useState(false);
+  const [productStats, setProductStats] = useState<Record<number, number>>({});
 
-  const [productStats, setProductStats] = useState<Record<number, number>>({
-    100: 52, 101: 48, 102: 95, 103: 30
-  });
-
-  // 자체 방문자 추적 시스템 (Native Daily Visitor Tracking)
   useEffect(() => {
-    const today = new Date().toISOString().split('T')[0];
-    const statsKey = 'hawkeye_visitor_stats';
-    const visitedKey = `hawkeye_visited_${today}`;
+    testConnection();
+    fetchProductStats();
     
-    // 세션 내 중복 방문 방지 (오늘 이미 방문했는지 체크)
-    if (!localStorage.getItem(visitedKey)) {
-      const statsStr = localStorage.getItem(statsKey);
-      const stats = statsStr ? JSON.parse(statsStr) : {};
-      
-      stats[today] = (stats[today] || 0) + 1;
-      localStorage.setItem(statsKey, JSON.stringify(stats));
-      localStorage.setItem(visitedKey, 'true'); // 오늘 방문 기록됨
-    }
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
+      if (session) {
+        setUser({
+          id: session.user.id,
+          name: session.user.user_metadata.full_name || session.user.email?.split('@')[0],
+          email: session.user.email || ''
+        });
+        fetchUserWishlist(session.user.id);
+      } else {
+        setUser(null);
+        setWishlist([]);
+      }
+    });
+
+    return () => subscription.unsubscribe();
   }, []);
+
+  const fetchProductStats = async () => {
+    const { data, error } = await supabase.from('products').select('id, view_count');
+    if (!error && data) {
+      const stats: Record<number, number> = {};
+      data.forEach(p => stats[p.id] = p.view_count);
+      setProductStats(stats);
+    }
+  };
+
+  const fetchUserWishlist = async (userId: string) => {
+    const { data, error } = await supabase.from('wishlist').select('product_id').eq('user_id', userId);
+    if (!error && data) {
+      setWishlist(data.map(item => item.product_id));
+    }
+  };
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+  }, [view, shopFilter]);
 
   const navigateToShop = (config: FilterConfig = { category: '안경테', tab: 'ALL' }) => {
     setShopFilter(config);
     setView('shop');
-    window.scrollTo(0, 0);
   };
 
-  const incrementView = (productId: number) => {
+  const handleSearch = (query: string) => {
+    navigateToShop({ search: query, tab: 'ALL' });
+  };
+
+  const incrementView = async (productId: number) => {
     setProductStats(prev => ({ ...prev, [productId]: (prev[productId] || 0) + 1 }));
+    const { data } = await supabase.from('products').select('view_count').eq('id', productId).single();
+    if (data) {
+      await supabase.from('products').update({ view_count: data.view_count + 1 }).eq('id', productId);
+    }
   };
 
-  const handleUserIconClick = () => {
-    if (!user) setIsLoginModalOpen(true);
-    else setView('mypage');
-  };
+  const toggleWishlist = async (productId: number) => {
+    if (!user) {
+      setIsLoginModalOpen(true);
+      return;
+    }
 
-  const toggleWishlist = (productId: number) => {
-    setWishlist(prev => 
-      prev.includes(productId) ? prev.filter(id => id !== productId) : [...prev, productId]
-    );
+    const isWished = wishlist.includes(productId);
+    if (isWished) {
+      setWishlist(prev => prev.filter(id => id !== productId));
+      await supabase.from('wishlist').delete().eq('user_id', user.id).eq('product_id', productId);
+    } else {
+      setWishlist(prev => [...prev, productId]);
+      await supabase.from('wishlist').insert({ user_id: user.id, product_id: productId });
+    }
   };
 
   const addToCart = (productId: number) => {
@@ -87,7 +123,6 @@ const App: React.FC = () => {
         첫 방문시 10% 할인 혜택 제공
       </div>
       
-      {/* 관리자 뷰일 때는 헤더를 숨길 수 있음 (선택 사항) */}
       {!view.startsWith('admin') && (
         <Header 
           onNavigateShop={navigateToShop} 
@@ -98,7 +133,8 @@ const App: React.FC = () => {
           onNavigateFitting={() => setView('fitting')}
           onNavigateBrands={() => setView('brands')}
           onNavigateReviews={() => setView('latest-review')}
-          onUserClick={handleUserIconClick}
+          onUserClick={() => (!user ? setIsLoginModalOpen(true) : setView('mypage'))}
+          onSearch={handleSearch}
           wishlistCount={wishlist.length}
           cartCount={cart.length}
           isLoggedIn={!!user}
@@ -116,25 +152,9 @@ const App: React.FC = () => {
                 <h2 className="text-3xl font-light uppercase tracking-tight">Trending Eyewear</h2>
                 <button onClick={() => navigateToShop()} className="text-sm border-b border-black pb-1 hover:text-gray-500 hover:border-gray-500 transition-colors">Shop All</button>
               </div>
-              <ProductGrid onDetailClick={() => navigateToShop()} />
+              <ProductGrid onDetailClick={(id) => navigateToShop({ search: id.toString() })} />
             </div>
           </>
-        )}
-
-        {view === 'admin-login' && (
-          <AdminLogin onLoginSuccess={() => setView('admin-dashboard')} onCancel={() => setView('home')} />
-        )}
-
-        {view === 'admin-dashboard' && (
-          <AdminDashboard onLogout={() => setView('home')} />
-        )}
-
-        {view === 'brands' && (
-          <BrandSelectionPage onBrandSelect={(brand) => navigateToShop({ brand, tab: 'ALL' })} />
-        )}
-
-        {view === 'latest-review' && (
-          <LatestReview />
         )}
 
         {view === 'shop' && (
@@ -149,11 +169,11 @@ const App: React.FC = () => {
         )}
 
         {view === 'cart' && (
-          <CartPage cartItems={cart} isLoggedIn={!!user} onUserClick={handleUserIconClick} onRemove={(id) => setCart(prev => prev.filter(p => p !== id))} onShopNow={() => navigateToShop()} />
+          <CartPage cartItems={cart} isLoggedIn={!!user} userId={user?.id} onUserClick={() => setIsLoginModalOpen(true)} onRemove={(id) => setCart(prev => prev.filter(p => p !== id))} onShopNow={() => navigateToShop()} />
         )}
 
         {view === 'wishlist' && (
-          <WishlistPage wishlist={wishlist} isLoggedIn={!!user} onUserClick={handleUserIconClick} toggleWishlist={toggleWishlist} addToCart={addToCart} onShopNow={() => navigateToShop()} />
+          <WishlistPage wishlist={wishlist} isLoggedIn={!!user} onUserClick={() => setIsLoginModalOpen(true)} toggleWishlist={toggleWishlist} addToCart={addToCart} onShopNow={() => navigateToShop()} />
         )}
 
         {view === 'mypage' && user && (
@@ -161,24 +181,24 @@ const App: React.FC = () => {
             user={user} 
             hasCoupon={hasWelcomeCoupon}
             onDownloadCoupon={() => setHasWelcomeCoupon(true)}
-            onLogout={() => {setUser(null); setHasWelcomeCoupon(false); setView('home');}} 
+            onLogout={async () => { await supabase.auth.signOut(); setView('home'); }} 
             onShopNow={() => navigateToShop()} 
           />
         )}
-
-        {view === 'huvits' && (
-          <HuvitsService onShopNow={() => navigateToShop({ category: '렌즈', tab: '프리미엄 렌즈' })} />
-        )}
-
-        {view === 'fitting' && (
-          <FittingService />
-        )}
+        
+        {view === 'huvits' && <HuvitsService onShopNow={() => navigateToShop({ category: '렌즈', tab: '프리미엄 렌즈' })} />}
+        {view === 'fitting' && <FittingService />}
+        {view === 'brands' && <BrandSelectionPage onBrandSelect={(brand) => navigateToShop({ brand, tab: 'ALL' })} />}
+        {view === 'latest-review' && <LatestReview />}
+        {view === 'admin-login' && <AdminLogin onLoginSuccess={() => setView('admin-dashboard')} onCancel={() => setView('home')} />}
+        {view === 'admin-dashboard' && <AdminDashboard onLogout={() => setView('home')} />}
       </main>
 
       {!view.startsWith('admin') && <Footer onAdminClick={() => setView('admin-login')} />}
+      {!view.startsWith('admin') && <ConsultationFAB />}
 
       {isLoginModalOpen && (
-        <LoginModal onClose={() => setIsLoginModalOpen(false)} onLoginSuccess={(u) => {setUser(u); setView('mypage'); setIsLoginModalOpen(false);}} />
+        <LoginModal onClose={() => setIsLoginModalOpen(false)} onLoginSuccess={(u) => { setView('mypage'); setIsLoginModalOpen(false); }} />
       )}
     </div>
   );
