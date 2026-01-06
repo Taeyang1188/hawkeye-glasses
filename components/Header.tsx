@@ -53,7 +53,7 @@ const Header: React.FC<HeaderProps> = ({
           <button className="md:hidden p-1" onClick={() => setIsMenuOpen(true)}>
             <Menu size={28} />
           </button>
-          <div className="hidden md:flex space-x-6 text-[11px] font-bold uppercase tracking-widest">
+          <div className="hidden md:flex space-x-8 text-[13px] font-bold uppercase tracking-widest">
             <button onClick={() => onNavigateShop({ category: '안경테', tab: 'ALL' })} className="hover:text-gray-500 transition-colors">안경테</button>
             <button onClick={() => onNavigateShop({ category: '렌즈', tab: 'ALL' })} className="hover:text-gray-500 transition-colors">렌즈</button>
             <button onClick={() => onNavigateShop({ category: '선글라스', tab: 'ALL' })} className="hover:text-gray-500 transition-colors">선글라스</button>
@@ -67,12 +67,12 @@ const Header: React.FC<HeaderProps> = ({
 
         <div className="flex items-center space-x-4 md:space-x-6">
           <div className="hidden md:flex items-center border-b border-gray-300 py-1">
-            <input type="text" placeholder="찾고 계신 상품을 검색하세요" className="bg-transparent text-[11px] focus:outline-none w-32 xl:w-48 font-light" />
+            <input type="text" placeholder="찾고 계신 상품을 검색하세요" className="bg-transparent text-[13px] focus:outline-none w-32 xl:w-48 font-light" />
             <Search size={18} className="text-gray-400" />
           </div>
           <button onClick={onUserClick} className={`relative flex items-center space-x-2 ${isLoggedIn ? 'text-black' : 'text-gray-400 hover:text-black'}`}>
             <User size={20} />
-            {isLoggedIn && <span className="hidden lg:inline text-[10px] font-bold uppercase tracking-tight">Peter Johnson</span>}
+            {isLoggedIn && <span className="hidden lg:inline text-[12px] font-bold uppercase tracking-tight">Peter Johnson</span>}
           </button>
           <button onClick={onNavigateWishlist} className="relative hover:text-gray-500 transition-colors">
             <Heart size={20} />
@@ -85,7 +85,7 @@ const Header: React.FC<HeaderProps> = ({
         </div>
       </div>
 
-      <div className="hidden md:flex justify-center space-x-8 py-2.5 bg-white border-b border-gray-100 text-[10px] font-bold uppercase tracking-widest">
+      <div className="hidden md:flex justify-center space-x-10 py-3 bg-white border-b border-gray-100 text-[12px] font-bold uppercase tracking-widest">
         <button onClick={() => onNavigateShop({ tab: 'NEW IN' })} className="text-red-600">NEW IN</button>
         <button onClick={() => onNavigateShop({ tab: '베스트셀러' })}>베스트셀러</button>
         <button onClick={() => onNavigateShop({ category: '안경테', tab: '무테 컬렉션' })}>무테 컬렉션</button>

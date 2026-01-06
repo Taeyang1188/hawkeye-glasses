@@ -29,6 +29,7 @@ const Footer: React.FC<FooterProps> = ({ onAdminClick }) => {
               Precision, style, and care for your vision in the heart of Seoul.
             </p>
             <div className="flex space-x-4">
+              {/* Instagram */}
               <a 
                 href="https://www.instagram.com/hawk_eye_optical/" 
                 target="_blank" 
@@ -37,6 +38,20 @@ const Footer: React.FC<FooterProps> = ({ onAdminClick }) => {
               >
                 <Instagram size={16} />
               </a>
+
+              {/* Google Place (Added to the right of Instagram) */}
+              <a 
+                href="https://www.google.com/viewer/place?mid=/g/11ym3bh3tg" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="w-8 h-8 rounded-full border border-gray-600 flex items-center justify-center hover:bg-white hover:text-black transition-all"
+              >
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+                  <path d="M12.48 10.92v3.28h7.84c-.24 1.84-.91 3.22-1.92 4.22-1.2 1.2-3.1 2.5-6.84 2.5-6.04 0-10.74-4.9-10.74-10.94S5.54 1.14 11.58 1.14c3.26 0 5.61 1.28 7.37 2.96l2.31-2.31C19.24.4 16.14-1 11.58-1 5.2-1 0 4.2 0 10.5s5.2 11.5 11.58 11.5c3.43 0 6.03-1.13 8.24-3.43 2.27-2.27 2.99-5.46 2.99-8.1 0-.77-.07-1.48-.2-2.15h-10.13z" />
+                </svg>
+              </a>
+
+              {/* Naver Blog */}
               <a 
                 href="https://blog.naver.com/hawkeye_optical" 
                 target="_blank" 
@@ -45,6 +60,8 @@ const Footer: React.FC<FooterProps> = ({ onAdminClick }) => {
               >
                 B
               </a>
+
+              {/* Naver Place */}
               <a 
                 href="https://naver.me/5noAk25v" 
                 target="_blank" 
@@ -53,6 +70,8 @@ const Footer: React.FC<FooterProps> = ({ onAdminClick }) => {
               >
                 N
               </a>
+
+              {/* Facebook */}
               <a href="#" className="w-8 h-8 rounded-full border border-gray-600 flex items-center justify-center hover:bg-white hover:text-black transition-all">
                 <Facebook size={16} />
               </a>
