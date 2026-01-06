@@ -1,8 +1,12 @@
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Ruler, CheckCircle, ExternalLink, Scissors, UserCheck, Eye } from 'lucide-react';
 
 const FittingService: React.FC = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <div className="bg-white min-h-screen animate-in fade-in duration-700 pb-20">
       {/* Hero Section */}

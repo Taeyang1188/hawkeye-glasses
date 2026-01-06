@@ -35,6 +35,10 @@ const ShopPage: React.FC<ShopPageProps> = ({ initialConfig, wishlist, toggleWish
   const [searchQuery, setSearchQuery] = useState(initialConfig.search || '');
   const [selectedProductId, setSelectedProductId] = useState<number | null>(null);
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [selectedProductId, activeCategory, activeTab]);
+
   // 백엔드에서 실제 상품 데이터 가져오기
   useEffect(() => {
     const fetchProducts = async () => {

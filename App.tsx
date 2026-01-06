@@ -76,8 +76,15 @@ const App: React.FC = () => {
     }
   };
 
+  // 강력한 스크롤 상단 이동 로직
   useEffect(() => {
-    window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+    // 렌더링 직후 즉시 이동
+    window.scrollTo(0, 0);
+    // 브라우저 렌더링 큐 고려하여 지연 이동 (이중 보장)
+    const timeoutId = setTimeout(() => {
+      window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
+    }, 10);
+    return () => clearTimeout(timeoutId);
   }, [view, shopFilter]);
 
   const navigateToShop = (config: FilterConfig = { category: '안경테', tab: 'ALL' }) => {
