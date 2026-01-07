@@ -1,9 +1,0 @@
-# IndexNow 인증 키 파일 
-/e76360a96e9d46fd80991cc7f21daa88.txt  /e76360a96e9d46fd80991cc7f21daa88.txt 200 
-# RSS와 Sitemap 같은 정적 파일 
-/rss.xml /rss.xml 200 
-/sitemap.xml /sitemap.xml 200 
-/feed.xml /feed.xml 200 
-/robots.txt /robots.txt 200 
-# 다른 모든 경로는 index.html로 (SPA 라우팅) 
-/* /index.html 200
