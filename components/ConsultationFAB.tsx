@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { MessageCircle, Phone, X, Calendar } from 'lucide-react';
 
@@ -26,7 +25,7 @@ const ConsultationFAB: React.FC = () => {
           <Phone size={18} className="text-blue-600" />
         </a>
         <a 
-          href="https://pf.kakao.com/_xxxxxx" // 실제 카카오톡 채널 링크로 변경 가능
+          href="https://pf.kakao.com/_CYxocn" 
           target="_blank" 
           rel="noopener noreferrer"
           className="bg-[#FAE100] text-black px-5 py-3 rounded-full shadow-xl flex items-center space-x-3 hover:brightness-95 transition-all group"
