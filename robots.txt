@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+Disallow: /admin-dashboard
+Disallow: /admin-login
+
+#DaumWebMasterTool:5c19b3bea65e81e9aa3b50ae9447765e84b51a1959be94c84a330a6c654a523d:7C0jj6iED7NsVjMXlLDRJA==
+
+Sitemap: https://hawkeye-glasses.netlify.app/sitemap.xml
